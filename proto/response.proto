@@ -1,0 +1,326 @@
+
+message BidResponse {
+
+  enum Nbr {
+      Unknown_Error = 0;
+      Technical_Error = 1;
+      Invalid_Request = 2;
+      Known_Web_Spider = 3;
+      Suspected_Non_Human_Traffic = 4;
+      Cloud_Data_center_or_Proxy_IP = 5;
+      Unsupported_Device = 6;
+      Blocked_Publisher_or_Site = 7;
+      Unmatched_User = 8;
+      Daily_Reader_Cap_Met = 9;
+      Daily_Domain_Cap_Met = 10;
+  }
+  //ID of the bid request to which this is a response.
+  required string id = 1;
+
+  //Array of seatbid objects; 1+ required if a bid is to be made.
+  repeated SeatBid seatbid = 2;
+
+  //Bid currency using ISO-4217 alpha codes.
+  optional string cur = 3;//default “USD”
+
+  //Optional feature to allow a bidder to set data in the
+  //    exchange’s cookie. The string must be in base85 cookie safe
+  //    characters and be in any format. Proper JSON encoding must
+  //    be used to include “escaped” quotation marks.
+  optional string customdata = 4;
+
+  //Reason for not bidding. Refer to List 5.24.
+  optional Nbr nbr = 5;
+
+  //Placeholder for bidder-specific extensions to OpenRTB.
+  optional Ext ext = 6;
+}
+
+message Ext {
+
+}
+
+message SeatBid {
+  //Array of 1+ Bid objects (Section 4.2.3) each related to an
+  //    impression. Multiple bids can relate to the same impression.
+  repeated Bid bid = 1;
+
+  //ID of the buyer seat (e.g., advertiser, agency) on whose behalf
+  //    this bid is made.
+  optional string seat = 2;
+
+  //0 = impressions can be won individually; 1 = impressions must
+  //    be won or lost as a group.
+  optional int32 group = 3;
+
+  //Placeholder for bidder-specific extensions to OpenRTB.
+  optional Ext ext = 4;
+}
+
+message Bid {
+  enum Attr {
+    Audio_Ad_Auto_Play = 1;
+    Audio_Ad_User_Initiated = 2;
+    Expandable_Automatic = 3;
+    Expandable_User_Initiated_Click = 4;
+    Expandable_User_Initiated_Rollover = 5;
+    In_Banner_Video_Ad_Auto_Play = 6;
+    In_Banner_Video_Ad_User_Initiated = 7;
+    Pop = 8;
+    Provocative_or_Suggestive_Imagery = 9;
+    Shaky_Flashing_Flickering_Extreme_Animation_Smileys = 10;
+    Surveys = 11;
+    Text_Only = 12;
+    User_Interactive = 13;
+    Windows_Dialog_or_Alert_Style = 14;
+    Has_Audio_On_Off_Button = 15;
+    Ad_Provides_Skip_Button = 16;
+    Adobe_Flash = 17;
+
+  }
+
+  enum Api {
+    VPAID_1_0 = 1;
+    VPAID_2_0 = 2;
+    MRAID_1 = 3;
+    ORMMA = 4;
+    MRAID_2 = 5;
+    MRAID_3 = 6;
+  }
+
+  enum Protocol {
+    VAST_1_0 = 1;
+    VAST_2_0 = 2;
+    VAST_3_0 = 3;
+    VAST_1_0_Wrapper = 4;
+    VAST_2_0_Wrapper = 5;
+    VAST_3_0_Wrapper = 6;
+    VAST_4_0 = 7;
+    VAST_4_0_Wrapper = 8;
+    DAAST_1_0 = 9;
+    DAAST_1_0_Wrapper = 10;
+  }
+
+  enum Qagmediarating {
+    All_Audiences = 1;
+    Everyone_Over_12 = 2;
+    Mature_Audiences = 3;
+  }
+
+  //Bidder generated bid ID to assist with logging/tracking.
+  required string id = 1;
+
+  //ID of the Imp object in the related bid request.
+  required string impid = 2;
+
+  //Bid price expressed as CPM although the actual transaction is
+  //for a unit impression only. Note that while the type indicates
+  //    float, integer math is highly recommended when handling
+  //    currencies (e.g., BigDecimal in Java).
+  required float price = 3;
+
+  //Win notice URL called by the exchange if the bid wins (not
+  //    necessarily indicative of a delivered, viewed, or billable ad);
+  //    optional means of serving ad markup. Substitution macros
+  //    (Section 4.4) may be included in both the URL and optionally
+  //    returned markup.
+  optional string nurl = 4;
+
+  //Billing notice URL called by the exchange when a winning bid
+  //    becomes billable based on exchange-specific business policy
+  //    (e.g., typically delivered, viewed, etc.). Substitution macros
+  //    (Section 4.4) may be included.
+  optional string burl = 5;
+
+  //Loss notice URL called by the exchange when a bid is known to
+  //    have been lost. Substitution macros (Section 4.4) may be
+  //    included. Exchange-specific policy may preclude support for
+  //    loss notices or the disclosure of winning clearing prices
+  //    resulting in ${AUCTION_PRICE} macros being removed (i.e.,
+  //    replaced with a zero-length string).
+  optional string lurl = 6;
+
+  //Optional means of conveying ad markup in case the bid wins;
+  //    supersedes the win notice if markup is included in both.
+  //Substitution macros (Section 4.4) may be included.
+  required string adm = 7;
+
+  //ID of a preloaded ad to be served if the bid wins.
+  optional string adid = 8;
+
+  //array Advertiser domain for block list checking (e.g., “ford.com”).
+  //    This can be an array of for the case of rotating creatives.
+  //    Exchanges can mandate that only one domain is allowed.
+  repeated string adomain = 9;
+
+  //A platform-specific application identifier intended to be
+  //unique to the app and independent of the exchange. On
+  //    Android, this should be a bundle or package name (e.g.,
+  //    com.foo.mygame). On iOS, it is a numeric ID.
+  required string bundle = 10;
+
+  //URL without cache-busting to an image that is representative
+  //    of the content of the campaign for ad quality/safety checking.
+  optional string irul = 11;
+
+  //Campaign ID to assist with ad quality checking; the collection
+  //    of creatives for which iurl should be representative.
+  optional string cid = 12;
+
+  //Creative ID to assist with ad quality checking.
+  optional string crid = 13;
+
+  //Tactic ID to enable buyers to label bids for reporting to the
+  //    exchange the tactic through which their bid was submitted.
+  //    The specific usage and meaning of the tactic ID should be
+  //    communicated between buyer and exchanges a priori.
+  optional string tactic = 14;
+
+  //array IAB content categories of the creative. Refer to List 5.1.
+  repeated string cat = 15;
+
+  //array Set of attributes describing the creative. Refer to List 5.3.
+  repeated Attr attr = 16;
+
+  //API required by the markup if applicable. Refer to List 5.6.
+  optional Api api = 17;
+
+  //Video response protocol of the markup if applicable. Refer to
+  //    List 5.8.
+  optional Protocol protocol = 18;
+
+  //Creative media rating per IQG guidelines. Refer to List 5.19.
+  optional Qagmediarating qagmediarating = 19;
+
+  //Language of the creative using ISO-639-1-alpha-2. The nonstandard code “xx” may also be used if the creative has no
+  //linguistic content (e.g., a banner with just a company logo).
+  optional string language = 20;
+
+  //Reference to the deal.id from the bid request if this bid
+  //    pertains to a private marketplace direct deal.
+  optional string dealid = 21;
+
+  //Width of the creative in device independent pixels (DIPS).
+  optional int32 w = 22;
+
+  //Height of the creative in device independent pixels (DIPS).
+  optional int32 h = 23;
+
+  //Relative width of the creative when expressing size as a ratio.
+  //    Required for Flex Ads.
+  optional int32 wratio = 24;
+
+  //Relative height of the creative when expressing size as a ratio.
+  //    Required for Flex Ads.
+  optional int32 hratio = 25;
+
+  //Advisory as to the number of seconds the bidder is willing to
+  //wait between the auction and the actual impression.
+  optional int32 exp = 26;
+
+  //Placeholder for bidder-specific extensions to OpenRTB.
+  optional Ext ext = 27;
+}
+
+message Native {
+  //Native Markup version in use
+  optional string ver = 1;
+
+  //List of native ad's assets.Refer to **asset response object**
+  repeated Asset assets = 2;
+
+  //Destination link if the ad is clicked.Refer to **link object**
+  required Link link = 3;
+
+  //Array of impression tracking URLs.When a display / impression happens,
+  // tracking URLs are reported and used as the reference for cost calculation
+  repeated string imptrackers = 4;
+
+  //Placeholder that may contain custom JSON
+  optional Ext ext = 5;
+}
+
+message Asset {
+  //Asset ID that matches with ID in Bid Request
+  required int32 id = 1;
+
+  //Set to 1 if asset is required (bidder requires it to be displayed)
+  optional int32 required = 2;
+
+  //Title object for title assets. Refer to **title object**
+  optional Title title = 3;
+
+  //Image object for image assets. Refer to **img object**
+  optional Img img = 4;
+
+  //Video object for video assets. Refer to **video object**
+  optional Video video = 5;
+
+  //Data object for data assets, eg. rating, pricing.Refer to **data object**
+  optional Data data = 6;
+
+  //Destination link if the ad is clicked.Refer to **link object**
+  optional Link link = 7;
+
+  //Placeholder that may contain custom JSON
+  optional Ext ext = 8;
+}
+
+message Title {
+  // Title text
+  required string text = 1;
+
+  //Length of title text
+  optional int32 len = 2;
+
+  //Placeholder that may contain custom JSON
+  optional Ext ext = 3;
+}
+
+message Img{
+  //Required for assetsurl or dcourl responses, not required for embedded
+  // asset responsesIcon image: Value = 1 Large image: Value = 3
+  required int32 type = 1;
+
+  //Image width in pixels
+  optional int32 w = 2;
+
+  //Image height in pixels
+  optional int32 h = 3;
+
+  //URL of the image asset
+  required string url = 4;
+
+  //Placeholder that may contain custom JSON
+  optional Ext ext = 5;
+}
+
+message Video {
+  //Indicate video content in vast format
+  required string vasttag  = 1;
+}
+
+message Data {
+  //Type ID of data element, must follow **5.26 Data Asset Type**if to be submitted
+  optional int32 type = 1;
+
+  //Name of data element, must follow **5.26 Data Asset Type**if to be submitted
+  optional string label= 2;
+
+  //Formatted string of data, based on the requirement of each data type
+  required string value = 3;
+
+  //Placeholder that may contain custom JSON
+  optional Ext ext = 4;
+}
+
+message Link {
+  //Landing URL of the clickable link
+  required string url = 1;
+
+  //List of third-party tracker URLs tobe fired on click of the URL
+  repeated string clicktrackers = 2;
+
+  //Placeholder that may contain custom JSON
+  optional Ext ext = 3;
+}
