@@ -41,7 +41,7 @@
 		"didsha1": "ecae9042f3e549a4fd1af27a1ed38b5f682fa3ca",
 		"didmd5": "c98de3c3706ae57c89f97c0778c8121d",
 		"dpidsha1": "a07713adea29cd23fd10a2e81a4fb07e23e00fb7",
-		"dpidmd5": "af4935679d392191157f687f48907492"  
+		"dpidmd5": "af4935679d392191157f687f48907492"
 	},
 	"at": 1,
 	"tmax": 2000
