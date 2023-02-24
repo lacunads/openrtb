@@ -18,59 +18,67 @@ Table of Content
 
 4 Real Time Bid RTB Interface Parameter
 
-​	4.1 Bid Request
+​	    4.1.1 source object
 
-​		4.1.1 source object
+​		4.1.2 source extension object
+		
+​		4.1.3 supplychain object
+		
+​		4.1.4 supplychain node object
+		
+​		4.1.5 regs object
 
-​		4.1.2 regs object
+​		4.1.6 regs Extension object
+		
+​		4.1.7 imp object
 
-​		4.1.3 imp object
+​		4.1.8 metric object
 
-​		4.1.4 metric object
+​		4.1.9 banner objectt
 
-​		4.1.5 banner object
+​		4.1.10 format objectest object
 
-​		4.1.6 format object
+​		4.1.11 video objectst object
 
-​		4.1.7 video object
+​		4.1.12 audio objectt
 
-​		4.1.8 audio object
+​		4.1.13 native object
 
-​		4.1.9 native object
+​		4.1.14 native request obj
 
-​		4.1.10 native request object
+​		4.1.15 asset request obje
 
-​		4.1.11 asset request object
+​		4.1.16 title object
 
-​		4.1.12 title object
+​		4.1.17 img object
 
-​		4.1.13 img object
+​		4.1.18 video object
 
-​		4.1.14 data object
+​		4.1.19 data objectct
 
-​		4.1.15 pmp object
+​		4.1.20 pmp object
 
-​		4.1.16 deal object
+​		4.1.21 deal objectt
 
-​		4.1.17 site object
+​		4.1.22 site object
 
-​		4.1.18 app object
+​		4.1.23 app object
 
-​		4.1.19 publisher object
+​		4.1.24 publisher objec
 
-​		4.1.20 content object
+​		4.1.25 content object
 
-​		4.1.21 producer object
+​		4.1.26 producer object
 
-​		4.1.22 device object
-
-​		4.1.23 geo object
-
-​		4.1.24 user object
-
-​		4.1.25 data object
-
-​		4.1.26 segment object
+​		4.1.27 device object
+		
+​		4.1.28 geo object
+		
+​		4.1.29 user object
+		
+​		4.1.30 data object
+		
+​        4.1.31 segment object
 
 ​		4.2 Bid Response
 
@@ -171,12 +179,15 @@ RTB Response Example
 ​    2e) video response example
 
 
+****
 
 # 1 Overview
 
 This document provides instructions for the integration of SHAREit Midas system with external Publisher system. It describes the requirements and steps needed to enable interface connection based on open RTB.
 
  
+
+****
 
 # 2 Steps for Integration
 
@@ -189,6 +200,8 @@ To enable Publisher to connect with Midas, the steps include:
 * Live: After test completes, SHAREit PIC from business team will follow up with official launch of integrated online traffic and start to record cost.
 
  
+
+****
 
 # 3 Real Time Bid
 
@@ -218,13 +231,13 @@ If Midas is participating in bid / auction, HTTP response status code should be 
 
 ## 3.4 Display Volume and Cost Calculation
 
-Display / Impression volume is based on the reported statistics via burl link, and is used for cost calculation. Publisher needs to ensure no repetitive reporting of each unique display, and all reported display volume is within the duration as defined by Midas to be counted as valid.
+Display / Impression volume is based on the imp. Publisher needs to ensure no repetitive reporting of each unique display.
 
  
 
-Midas defines the valid duration (in seconds) between the bid / auction and the actual display / impression using field ‘bidresponse.seatbid.bid.exp’.
-
  
+
+****
 
 # 4 Real Time Bid RTB Interface Parameter 
 
@@ -257,25 +270,67 @@ Midas defines the valid duration (in seconds) between the bid / auction and the 
 
 ### 4.1.1 source object
 
-| **Parameter name** | **Type**   | **Required?**         | **Description**                                                                                                       |
-|:-------------------|:-----------|:----------------------|:----------------------------------------------------------------------------------------------------------------------|
-| fd                 | integer    | Yes                   | Entity responsible for the final impression sale decision, where0 = exchange, 1 = upstream source                     |
-| tid                | string     | Yes                   | Transaction ID that must be common across all participants in this bid request (e.g., potentially multiple exchanges) |
-| pchain             | string     | Yes                   | Payment ID chain string containing embedded syntax described in the TAG Payment ID Protocol v1.0                      |
-| ext                | object     | No                    | Placeholder for exchange-specific extensions to OpenRTB                                                               |
+| **Parameter name** | **Type**   | **Required?** | **Description**                                                                                                                         |
+|:-------------------|:-----------|:--------------|:----------------------------------------------------------------------------------------------------------------------------------------|
+| fd                 | integer    | No            | Entity responsible for the final impression sale decision, where0 = exchange, 1 = upstream source                                       |
+| tid                | string     | Yes           | Transaction ID that must be common across all participants in this bid request (e.g., potentially multiple exchanges)                   |
+| pchain             | string     | No            | Payment ID chain string containing embedded syntax described in the TAG Payment ID Protocol v1.0                                        |
+| ext                | object     | No            | Placeholder for exchange-specific extensions to OpenRTB .Details can be found in **source Extension object** parameter definition below |
 
  
 
-### 4.1.2 regs object
+### 4.1.2 source extension object
 
-| **Parameter name** | **Type**   | **Required?**         | **Description**                                                                                                                                                  |
-|:-------------------|:-----------|:----------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| coppa              | integer    | Yes                   | Flag indicating if this request is subject to the COPPA regulations established by the USA FTC, where 0 = no, 1 = yes. Refer to Section 7.5 for more information |
-| ext                | object     | No                    | Placeholder for exchange-specific extensions to OpenRTB                                                                                                          |
+| **Parameter name** | **Type** | **Required?** | **Description**                                                                                              |
+|:-------------------|:---------|:--------------|:-------------------------------------------------------------------------------------------------------------|
+| omidpn             | string   | Yes           | Identifier of the OM SDK integration                                                                         |
+| omidpv             | string   | Yes           | Version of the OM SDK integration                                                                            |
+| schain             | object   | Yes           | Contains the supplychain object.Details can be found in **supplychain object** parameter definition below    |
 
  
 
-### 4.1.3 imp object
+### 4.1.3 supplychain object
+
+| **Parameter name** | **Type**     | **Required?** | **Description**                                                                                                                                                                                                               |
+|:-------------------|:-------------|:--------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| complete           | integer      | Yes           | Flag indicating whether the chain contains all nodes leading back to the source of the inventory, where 0 = no, 1 = yes                                                                                                       |
+| nodes              | opject array | Yes           | Array of objects in the order of placing in the chain. The original source of the request is first and the final seller of the request last.Details can be found in **supplyschain node object** parameter definition below   |
+| ver                | string       | Yes           | Version of the supply chain specification in use. Currently "1.0" is the only option                                                                                                                                          |
+
+ 
+
+### 4.1.4 supplychain node object
+
+|**Parameter name** |**Type**   | **Required?** | **Description**                                                                                                                                                                                                                                                                                                                           |
+|:----------- -|:--------|:---------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| asi         | string  | Yes      | The canonical domain name of the SSP, Exchange, Header Wrapper, etc system that bidders connect to                                                                                                                                                                                                                               |
+| sid         | string  | Yes      | The identifier associated with the seller or reseller account within the advertising system. In OpenRTB, this is publisher.id.                                                                                                                                                                                                   |
+| hp          | integer | Yes      | Indicates whether this node will be involved in the flow of payment for the inventory.  When set to 1, the advertising system in the asi field pays the seller in the sid field, who is responsible for paying the previous node in the chain.When set to 0, this node is not involved in the flow of payment for the inventory. |
+| rid         | string  | No       | The OpenRTB RequestId of the request as issued by this seller.                                                                                                                                                                                                                                                                   |
+| name        | string  | No       | The business name of the entity represented by this node.                                                                                                                                                                                                                                                                        |
+| domain      | string  | No       | The business domain name of the entity represented by this node.                                                                                                                                                                                                                                                                 |
+
+ 
+
+### 4.1.5 regs object
+
+| **Parameter name** | **Type**   | **Required?**         | **Description**                                                                                                                                                    |
+|:-------------------|:-----------|:----------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| coppa              | integer    | Yes                   | Flag indicating if this request is subject to the COPPA regulations established by the USA FTC, where 0 = no, 1 = yes. Refer to Section 7.5 for more information   |
+| ext                | object     | No                    | Placeholder for exchange-specific extensions to OpenRTB.Details can be found in **regs Extension object** parameter definition below                               |
+
+ 
+
+### 4.1.6 regs Extension object
+
+| **Parameter name** | **Type** | **Required?** | **Description**                                                                         |
+|:-------------------|:---------|:--------------|:----------------------------------------------------------------------------------------|
+| gdpr               | integer  | No            | Indicates whether the request falls under GDPR regulations:0 = No,1 = Yes               |
+| us_privacy         | string   | No            | Passes the user privacy status for requests which fall under CCPA regulations.          |
+
+ 
+
+### 4.1.7 imp object
 
 | **Parameter name**         | **Type**      | **Required?**               | **Description**                                                                                                                                                                                                              |
 |:---------------------------|:--------------|:----------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -300,7 +355,7 @@ Midas defines the valid duration (in seconds) between the bid / auction and the 
 
  
 
-### 4.1.4 metric object
+### 4.1.8 metric object
 | **Parameter name** | **Type**      | **Required?** | **Description**                                                                                                                                                                             |
 |:-------------------|:--------------|:--------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | type               | string        | Yes           | Type of metric being presented using exchange curated string names which should be published to bidders a priori                                                                            |
@@ -310,7 +365,7 @@ Midas defines the valid duration (in seconds) between the bid / auction and the 
 
  
 
-### 4.1.5 banner object
+### 4.1.9 banner object
 | **Parameter name** | **Type**       | **Required?** | **Description**                                                                                                                                                                                                                                |
 |:-------------------|:---------------|:--------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | format             | object array   | 否             | Array of format objects (Section 3.2.10) representing the banner sizes permitted. If none are specified, then use of the h and w attributes is highly recommended. Refer to **format object**                                                  |
@@ -333,7 +388,7 @@ Midas defines the valid duration (in seconds) between the bid / auction and the 
 
  
 
-### 4.1.6 format object
+### 4.1.10 format object
 | **Parameter name** | **Type**       | **Required?**   | **Description**                                                                                                                                                             |
 |:-------------------|:---------------|:----------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | w                  | integer        | Yes             | Exact width in device independent pixels (DIPS); If not specified wmin and wmax , this value refers to the required display width, otherwise refers to the desired width    |
@@ -343,11 +398,9 @@ Midas defines the valid duration (in seconds) between the bid / auction and the 
 | wmin               | integer        | No              | The minimum width in device independent pixels (DIPS) at which the ad will be displayed the size is expressed as a ratio                                                    |
 | ext                | object         | No              | Placeholder for exchange-specific extensions to OpenRTB                                                                                                                     |
 
-****
-
  
 
-### 4.1.7 video object
+### 4.1.11 video object
 
 | **Parameter name** | **Type**      | **Required?** | **Description**                                                                                                                                                                                                                                                                            |
 |:-------------------|:--------------|:--------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -381,7 +434,7 @@ Midas defines the valid duration (in seconds) between the bid / auction and the 
 
  
 
-### 4.1.8 audio object
+### 4.1.12 audio object
 
 | **Parameter name**  | **Type**       | **Required?** | **Description**                                                                                                                                                                                                                                                                                        |
 |:--------------------|:---------------|:--------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -408,7 +461,7 @@ Midas defines the valid duration (in seconds) between the bid / auction and the 
 
  
 
-### 4.1.9 native object
+### 4.1.13 native object
 
 | **Parameter name**  | **Type**      | **Required?** | **Description**                                                                                                                                                                                              |
 |:--------------------|:--------------|:--------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -420,18 +473,16 @@ Midas defines the valid duration (in seconds) between the bid / auction and the 
 
  
 
-### 4.1.10 native request object
+### 4.1.14 native request object
 
 | **Parameter name** | **Type**     | **Required?** | **Description**                                                                                                                                                  |
 |:-------------------|:-------------|:--------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | assets             | object array | Yes           | Use **asset request object** to show the requirement of Native ad for assets and other elements. All assets and other elements should follow this request object |
 | ver                | string       | Yes           | Native Markup version, default version is 1.0                                                                                                                    |
 
-****
-
  
 
-### 4.1.11 asset request object 
+### 4.1.15 asset request object 
 
 | **Parameter name** | **Type** | **Required?** | **Description**                                                                                                                                            |
 |:-------------------|:---------|:--------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -442,21 +493,17 @@ Midas defines the valid duration (in seconds) between the bid / auction and the 
 | video              | object   | No            | Video object for video assets. Refer to **video object**                                                                                                   |
 | data               | object   | No            | Data object for data assets, eg. brand, description, rating, pricing etc.Refer to **data object**                                                          |
 
-****
-
  
 
-### 4.1.6 title object 
+### 4.1.16 title object 
 
 | **Parameter name** | **Type** | **Required?** | **Description**                                                               |
 |:-------------------|:---------|:--------------|:------------------------------------------------------------------------------|
 | len                | integer  | Yes           | Maximum title text length. Recommended text length is 25, 90, 140 characters  |
 
-****
-
  
 
-### 4.1.13 img object 
+### 4.1.17 img object 
 
 | **Parameter name** | **Type**     | **Required?** | **Description**                                                                    |
 |:-------------------|:-------------|:--------------|:-----------------------------------------------------------------------------------|
@@ -467,11 +514,9 @@ Midas defines the valid duration (in seconds) between the bid / auction and the 
 | hmin               | integer      | Yes           | Minimum image height / length. Unit is in pixels                                   |
 | mimes              | string array | No            | Supported image mime-type, including but not limited to ‘image/jpg’and ‘image/gif’ |
 
-****
-
  
 
-### 4.1.14 video object 
+### 4.1.18 video object 
 
 | **Parameter name** | **Type**      | **Required?** | **Description**                                                           |
 |:-------------------|:--------------|:--------------|:--------------------------------------------------------------------------|
@@ -480,11 +525,9 @@ Midas defines the valid duration (in seconds) between the bid / auction and the 
 | maxduration        | integer       | Yes           | Maximum video ad length. Unit is in seconds                               |
 | protocols          | integer array | Yes           | Applicable video protocol for Publisher in Bid Response.Refer to List 5.8 |
 
-****
-
  
 
-### 4.1.15 data object 
+### 4.1.19 data object 
 
 | **Parameter name** | **Type**     | **Required?** | **Description**                                                                                                                                |
 |:-------------------|:-------------|:--------------|:-----------------------------------------------------------------------------------------------------------------------------------------------|
@@ -493,7 +536,7 @@ Midas defines the valid duration (in seconds) between the bid / auction and the 
 
  
 
-### 4.1.16 pmp object
+### 4.1.20 pmp object
 
 | **Parameter name** | **Type**        | **Required?** | **Description**                                                                                                                                                                                |
 |:-------------------|:----------------|:--------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -503,7 +546,7 @@ Midas defines the valid duration (in seconds) between the bid / auction and the 
 
  
 
-### 4.1.17 deal object
+### 4.1.21 deal object
 
 | **Parameter name** | **Type**      | **Required?** | **Description**                                                                                                                                                                 |
 |:-------------------|:--------------|:--------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -517,7 +560,7 @@ Midas defines the valid duration (in seconds) between the bid / auction and the 
 
  
 
-### 4.1.18 site object
+### 4.1.22 site object
 
 | **Parameter name** | **Type**        | **Required?** | **Description**                                                                                                   |
 |:-------------------|:----------------|:--------------|:------------------------------------------------------------------------------------------------------------------|
@@ -539,7 +582,7 @@ Midas defines the valid duration (in seconds) between the bid / auction and the 
 
  
 
-### 4.1.19 app object 
+### 4.1.23 app object 
 
 | **Parameter name** | **Type**       | **Required?** | **Description**                                                                                       |
 |:-------------------|:---------------|:--------------|:------------------------------------------------------------------------------------------------------|
@@ -560,7 +603,7 @@ Midas defines the valid duration (in seconds) between the bid / auction and the 
 
  
 
-### 4.1.20 publisher object 
+### 4.1.24 publisher object 
 
 | **Parameter name** | **Type**       | **Required?**   | **Description**                                                                         |
 |:-------------------|:---------------|:----------------|:----------------------------------------------------------------------------------------|
@@ -570,11 +613,11 @@ Midas defines the valid duration (in seconds) between the bid / auction and the 
 | cat                | string array   | No              | Array of IAB content categories that describe the publisher.Refer to List 5.1           |
 | ext                | object         | No              | Placeholder for exchange-specific extensions to OpenRTB                                 |
 
-****
+
 
  
 
-### 4.1.21 content object
+### 4.1.25 content object
 
 | **Parameter name**  | **Type**      | **Required?** | **Description**                                                                                                |
 |:--------------------|:--------------|:--------------|:---------------------------------------------------------------------------------------------------------------|
@@ -605,11 +648,9 @@ Midas defines the valid duration (in seconds) between the bid / auction and the 
 | data                | object array  | No            | Additional content data.  Refer to **data object**                                                             |
 | ext                 | object        | No            | Placeholder for exchange-specific extensions to OpenRTB                                                        |
 
-****
-
  
 
-### 4.1.22 producer object
+### 4.1.26 producer object
 
 | **Parameter name** | **Type**       | **Required?**   | **Description**                                                                        |
 |:-------------------|:---------------|:----------------|:---------------------------------------------------------------------------------------|
@@ -619,11 +660,9 @@ Midas defines the valid duration (in seconds) between the bid / auction and the 
 | cat                | string array   | No              | Array of IAB content categories that describe the content producer. Refer to List 5.1. |
 | ext                | object         | No              | Placeholder for exchange-specific extensions to OpenRTB                                |
 
-****
-
  
 
-### 4.1.23 device object 
+### 4.1.27 device object 
 
 | **Parameter name** | **Type**  | **Required?** | **Description**                                                                                                                                                  |
 |:-------------------|:----------|:--------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -661,7 +700,7 @@ Midas defines the valid duration (in seconds) between the bid / auction and the 
 
  
 
-### 4.1.13 geo object 
+### 4.1.28 geo object 
 
 | **Parameter name** | **Type**   | **Required?** | **Description**                                                                                                                                                                                              |
 |:-------------------|:-----------|:--------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -682,7 +721,7 @@ Midas defines the valid duration (in seconds) between the bid / auction and the 
 
  
 
-### 4.1.14 user object 
+### 4.1.29 user object 
 
 | **Parameter name** | **Type**     | **Required?** | **Description**                                                             |
 |:-------------------|:-------------|:--------------|:----------------------------------------------------------------------------|
@@ -698,7 +737,7 @@ Midas defines the valid duration (in seconds) between the bid / auction and the 
 
  
 
-### 4.1.15 data object 
+### 4.1.30 data object 
 
 | **Parameter name** | **Type**     | **Required?** | **Description**                                                             |
 |:-------------------|:-------------|:--------------|:----------------------------------------------------------------------------|
@@ -707,11 +746,11 @@ Midas defines the valid duration (in seconds) between the bid / auction and the 
 | segment            | object array | No            | Data segment that includes the actual data info.Refer to **segment object** |
 | ext                | object       | No            | Placeholder for exchange-specific extensions to OpenRTB                     |
 
-****
+
 
  
 
-### 4.1.16 segment object 
+### 4.1.31 segment object 
 
 | **Parameter name** | **Type**     | **Required?** | **Description**                                         |
 |:-------------------|:-------------|:--------------|:--------------------------------------------------------|
@@ -720,9 +759,11 @@ Midas defines the valid duration (in seconds) between the bid / auction and the 
 | value              | string       | No            | Segment value                                           |
 | ext                | object       | No            | Placeholder for exchange-specific extensions to OpenRTB |
 
-****
+
 
  
+
+****
 
 ## 4.2 Bid Response
 
@@ -772,7 +813,7 @@ Each bid object must have a corresponding imp id, indicating the bid is offered 
 | protocol             | integer       | No                  | Supported video Bid Response protocol. Section **5.8 Video bid response protocol** is the reference of its enumerated values                                                                                                                |
 | qagmediarating       | integer       | No                  | Indicate rating of creative content following IQG standard.Section **5.9 IQG media rating** is the reference of its enumerated values                                                                                                       |
 | language             | string        | No                  | Language of the creative using ISO-639-1-alpha-2                                                                                                                                                                                            |
-| dealid               | string        | No                  | Refer to deal.id****from the bid request if this bid pertains to a private marketplace direct deal                                                                                                                                          |
+| dealid               | string        | No                  | Refer to deal.idfrom the bid request if this bid pertains to a private marketplace direct deal                                                                                                                                          |
 | w                    | integer       | No                  | Creative width. Unit is in pixels                                                                                                                                                                                                           |
 | h                    | integer       | No                  | Creative height. Unit is in pixels                                                                                                                                                                                                          |
 | wratio               | integer       | No                  | Relative width of the creative when expressing size as a ratio. Required for Flex Ads                                                                                                                                                       |
@@ -868,6 +909,8 @@ Note: Video in native ad response is just one type of assets. Therefore, it does
 | url                | string           | Yes           | Landing URL of the clickable link                               |
 | clicktrackers      | array of strings | No            | List of third-party tracker URLs tobe fired on click of the URL |
 | ext                | object           | No            | Placeholder that may contain custom JSON                        |
+
+****
 
 # 
 # **5 RTB Interface Enumerated Value List**
@@ -1254,7 +1297,7 @@ Note: Video in native ad response is just one type of assets. Therefore, it does
 | IAB23-8            |Judaism|
 | IAB23-9            |Latter-Day Saints|
 | IAB23-10           |Pagan/Wiccan|
-| **IAB24****IAB25** |**Uncategorized****Non-Standard Content**|
+| **IAB24IAB25** |**UncategorizedNon-Standard Content**|
 | IAB25-1            |Unmoderated UGC|
 | IAB25-2            |Extreme Graphic/Explicit Violence|
 | IAB25-3            |Pornography|
