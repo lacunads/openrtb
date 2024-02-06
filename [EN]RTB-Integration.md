@@ -200,12 +200,15 @@ RTB Response Example
 ​    2e) video response example
 
 
+****
 
 # 1 Overview
 
 This document provides instructions for the integration of SHAREit Midas system with external Publisher system. It describes the requirements and steps needed to enable interface connection based on open RTB.
 
  
+
+****
 
 # 2 Steps for Integration
 
@@ -218,6 +221,8 @@ To enable Publisher to connect with Midas, the steps include:
 * Live: After test completes, SHAREit PIC from business team will follow up with official launch of integrated online traffic and start to record cost.
 
  
+
+****
 
 # 3 Real Time Bid
 
@@ -247,13 +252,13 @@ If Midas is participating in bid / auction, HTTP response status code should be 
 
 ## 3.4 Display Volume and Cost Calculation
 
-Display / Impression volume is based on the reported statistics via burl link, and is used for cost calculation. Publisher needs to ensure no repetitive reporting of each unique display, and all reported display volume is within the duration as defined by Midas to be counted as valid.
+Display / Impression volume is based on the imp. Publisher needs to ensure no repetitive reporting of each unique display.
 
  
 
-Midas defines the valid duration (in seconds) between the bid / auction and the actual display / impression using field ‘bidresponse.seatbid.bid.exp’.
-
  
+
+****
 
 # 4 Real Time Bid RTB Interface Parameter 
 
@@ -340,19 +345,19 @@ Midas defines the valid duration (in seconds) between the bid / auction and the 
 
 ### 4.1.2 regs object
 
-| **Parameter name** | **Type**   | **Required?**        | **Description**                                                                                                                                                  |
-|:-------------------|:-----------|:---------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| coppa              | integer    | No                   | Flag indicating if this request is subject to the COPPA regulations established by the USA FTC, where 0 = no, 1 = yes. Refer to Section 7.5 for more information |
-| ext                | object     | No                   | Placeholder for exchange-specific extensions to OpenRTB. Details can be found in **regs.ext object** parameter definition below                                  |
+| **Parameter name** | **Type**   | **Required?**         | **Description**                                                                                                                                                    |
+|:-------------------|:-----------|:----------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| coppa              | integer    | Yes                   | Flag indicating if this request is subject to the COPPA regulations established by the USA FTC, where 0 = no, 1 = yes. Refer to Section 7.5 for more information   |
+| ext                | object     | No                    | Placeholder for exchange-specific extensions to OpenRTB.Details can be found in **regs Extension object** parameter definition below                               |
 
  
 
 #### 4.1.2.1 regs.ext object
 
-| **参数名称**     | **类型**    | **是否必传** | **描述**                                                                                     |
-|:-------------|:----------|:---------|:-------------------------------------------------------------------------------------------|
-| gdpr         | integer   | No       | Flag indicating if this request is subject to the GDPR regulations, where 0 = no, 1 = yes. |
-| us_privacy   | string    | No       | Requests from US users suggest carry us_privacy value.                                     |
+| **Parameter name** | **Type** | **Required?** | **Description**                                                                         |
+|:-------------------|:---------|:--------------|:----------------------------------------------------------------------------------------|
+| gdpr               | integer  | No            | Indicates whether the request falls under GDPR regulations:0 = No,1 = Yes               |
+| us_privacy         | string   | No            | Passes the user privacy status for requests which fall under CCPA regulations.          |
 
  
 
@@ -390,6 +395,7 @@ Midas defines the valid duration (in seconds) between the bid / auction and the 
  
 
 ### 4.1.4 metric object
+
 | **Parameter name** | **Type**      | **Required?** | **Description**                                                                                                                                                                             |
 |:-------------------|:--------------|:--------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | type               | string        | No            | Type of metric being presented using exchange curated string names which should be published to bidders a priori                                                                            |
@@ -404,6 +410,7 @@ Midas defines the valid duration (in seconds) between the bid / auction and the 
  
 
 ### 4.1.5 banner object
+
 | **Parameter name** | **Type**       | **Required?** | **Description**                                                                                                                                                                                                                                |
 |:-------------------|:---------------|:--------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | format             | object array   | No            | Array of format objects (Section 3.2.10) representing the banner sizes permitted. If none are specified, then use of the h and w attributes is highly recommended. Refer to **format object**                                                  |
@@ -427,6 +434,7 @@ Midas defines the valid duration (in seconds) between the bid / auction and the 
  
 
 #### 4.1.5.1 banner.format object
+
 | **Parameter name** | **Type**       | **Required?**   | **Description**                                                                                                                                                             |
 |:-------------------|:---------------|:----------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | w                  | integer        | Yes             | Exact width in device independent pixels (DIPS); If not specified wmin and wmax , this value refers to the required display width, otherwise refers to the desired width    |
@@ -542,22 +550,20 @@ Midas defines the valid duration (in seconds) between the bid / auction and the 
 
 #### 4.1.8.2 native.request.asset object
 
-| **Parameter name** | **Type** | **Required?** | **Description**                                                                                                                                            |
-|:-------------------|:---------|:--------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------|
-| id                 | integer  | Yes           | The only identification ID of the object                                                                                                                   |
-| required           | integer  | Yes           | Indicate if the asset object is a must-have for client (bidder) in order to get a bid accepted. Value of 1 means yes. Value of 0 means it is not necessary |
-| title              | object   | No            | Title object for title assets. Refer to **native.request.asset.title object**                                                                              |
-| img                | object   | No            | Image object for image assets. Refer to **native.request.asset.img object**                                                                                |
-| video              | object   | No            | Video object for video assets. Refer to **native.request.asset.video object**                                                                              |
-| data               | object   | No            | Data object for data assets, eg. brand, description, rating, pricing etc.Refer to **native.request.asset.data object**                                     |
+| **Parameter name** | **Type**     | **Required?** | **Description**                                                                                                                                                  |
+|:-------------------|:-------------|:--------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| assets             | object array | Yes           | Use **asset request object** to show the requirement of Native ad for assets and other elements. All assets and other elements should follow this request object |
+| ver                | string       | Yes           | Native Markup version, default version is 1.0                                                                                                                    |
 
  
 
 #### 4.1.8.3 native.request.asset.title object
-
 | **Parameter name** | **Type** | **Required?** | **Description**                                                               |
-|:-------------------|:---------|:--------------|:------------------------------------------------------------------------------|
-| len                | integer  | Yes           | Maximum title text length. Recommended text length is 25, 90, 140 characters  |
+|:-------------------|:---------|:--------------|:----------------------------------------------------------- -------------------|
+| title              | object   | No            | Title object for title assets. Refer to **title object**                                                                                                   |
+| img                | object   | No            | Image object for image assets. Refer to **img object**                                                                                                     |
+| video              | object   | No            | Video object for video assets. Refer to **video object**                                                                                                   |
+| data               | object   | No            | Data object for data assets, eg. brand, description, rating, pricing etc.Refer to **data object**                                                          |
 
  
 
@@ -896,12 +902,17 @@ Midas defines the valid duration (in seconds) between the bid / auction and the 
 
 #### 4.1.17.2 user.data.segment object
 
-| **Parameter name** | **Type**     | **Required?** | **Description**                                         |
-|:-------------------|:-------------|:--------------|:--------------------------------------------------------|
-| id                 | string       | No            | Segment ID defined by data provider                     |
-| name               | string       | No            | Segment name defined by data provider                   |
-| value              | string       | No            | Segment value                                           |
-| ext                | object       | No            | Placeholder for exchange-specific extensions to OpenRTB |
+| **Parameter name** | **Type**     | **Required?** | **Description**                                                             |
+|:-------------------|:-------------|:--------------|:----------------------------------------------------------------------------|
+| id                 | string       | Yes           | User ID                                                                     |
+| buyeruid           | string       | No            | User ID defined by buyer                                                    |
+| gender             | string       | No            | Gender. Value of M means male, F means female, 0 means other gender.        |
+| geo                | object       | No            | User geo info                                                               |
+| yob                | integer      | No            | Year of birth, 4-digit number.                                              |
+| keywords           | string       | No            | Keywords list of user's interests / intentions list, separated by comma (,) |
+| customdata         | string       | No            | Customized data                                                             |
+| data               | object array | No            | Extra user data. Each data object represents a different data source        |
+| ext                | object       | No            | Placeholder for exchange-specific extensions to OpenRTB                     |
 
  
 
@@ -916,6 +927,8 @@ Midas defines the valid duration (in seconds) between the bid / auction and the 
 ****
 
  
+
+****
 
 ## 4.2 Bid Response
 
@@ -975,7 +988,7 @@ Each bid object must have a corresponding imp id, indicating the bid is offered 
 | protocol             | integer       | No                  | Supported video Bid Response protocol. Section **5.8 Video bid response protocol** is the reference of its enumerated values                                                                                                                |
 | qagmediarating       | integer       | No                  | Indicate rating of creative content following IQG standard.Section **5.9 IQG media rating** is the reference of its enumerated values                                                                                                       |
 | language             | string        | No                  | Language of the creative using ISO-639-1-alpha-2                                                                                                                                                                                            |
-| dealid               | string        | No                  | Refer to deal.id****from the bid request if this bid pertains to a private marketplace direct deal                                                                                                                                          |
+| dealid               | string        | No                  | Refer to deal.idfrom the bid request if this bid pertains to a private marketplace direct deal                                                                                                                                          |
 | w                    | integer       | No                  | Creative width. Unit is in pixels                                                                                                                                                                                                           |
 | h                    | integer       | No                  | Creative height. Unit is in pixels                                                                                                                                                                                                          |
 | wratio               | integer       | No                  | Relative width of the creative when expressing size as a ratio. Required for Flex Ads                                                                                                                                                       |
@@ -1017,8 +1030,9 @@ Asset response object must strictly follow asset object in the Bid Request. Each
 | data               | object     | No            | Data object for data assets, eg. rating, pricing.Refer to **data object** |
 | link               | object     | No            | Destination link if the ad is clicked.Refer to **link object**            |
 | ext                | object     | No            | Placeholder that may contain custom JSON                                  |
+
+ 
  
-### 
 ### 4.2.5 title object
 
 | **Parameter name** | **Type** | **Required?** | **Description**                          |
@@ -1071,6 +1085,8 @@ Note: Video in native ad response is just one type of assets. Therefore, it does
 | url                | string           | Yes           | Landing URL of the clickable link                               |
 | clicktrackers      | array of strings | No            | List of third-party tracker URLs tobe fired on click of the URL |
 | ext                | object           | No            | Placeholder that may contain custom JSON                        |
+
+****
 
 # 
 # **5 RTB Interface Enumerated Value List**
@@ -1457,7 +1473,7 @@ Note: Video in native ad response is just one type of assets. Therefore, it does
 | IAB23-8            |Judaism|
 | IAB23-9            |Latter-Day Saints|
 | IAB23-10           |Pagan/Wiccan|
-| **IAB24****IAB25** |**Uncategorized****Non-Standard Content**|
+| **IAB24IAB25** |**UncategorizedNon-Standard Content**|
 | IAB25-1            |Unmoderated UGC|
 | IAB25-2            |Extreme Graphic/Explicit Violence|
 | IAB25-3            |Pornography|
