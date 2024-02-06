@@ -18,87 +18,108 @@ Table of Content
 
 4 Real Time Bid RTB Interface Parameter
 
-​	    4.1.1 source object
+​ 4.1 Bid Request
 
-​		4.1.2 source extension object
-		
-​		4.1.3 supplychain object
-		
-​		4.1.4 supplychain node object
-		
-​		4.1.5 regs object
+​ ​  4.1.1 source object
 
-​		4.1.6 regs Extension object
-		
-​		4.1.7 imp object
+​ ​ ​ 4.1.1.1 source.ext object
 
-​		4.1.8 metric object
+​ ​ ​ 4.1.1.2 source.ext.schain object
 
-​		4.1.9 banner objectt
+​ ​ ​ 4.1.1.3 source.ext.schain.nodes object
 
-​		4.1.10 format objectest object
+​ ​  4.1.2 regs object
 
-​		4.1.11 video objectst object
+​ ​ ​ 4.1.2.1 regs.ext object
 
-​		4.1.12 audio objectt
+​ ​ 4.1.3 imp object
 
-​		4.1.13 native object
+​ ​ 4.1.4 metric object
 
-​		4.1.14 native request obj
+​ ​ 4.1.5 banner object
 
-​		4.1.15 asset request obje
+​ ​ ​ 4.1.5.1 banner.format object
 
-​		4.1.16 title object
+​ ​ 4.1.6 video object
 
-​		4.1.17 img object
+​ ​ 4.1.7 audio object
 
-​		4.1.18 video object
+​ ​ 4.1.8 native object
 
-​		4.1.19 data objectct
+​ ​ ​ 4.1.8.1 native.request object
 
-​		4.1.20 pmp object
+​ ​ ​ 4.1.8.2 native.request.asset object
 
-​		4.1.21 deal objectt
+​ ​ ​ 4.1.8.3 native.request.asset.title object
 
-​		4.1.22 site object
+​ ​ ​ 4.1.8.4 native.request.asset.img object
 
-​		4.1.23 app object
+​ ​ ​ 4.1.8.5 native.request.asset.video object
 
-​		4.1.24 publisher objec
+​ ​ ​ 4.1.8.6 native.request.asset.data object
 
-​		4.1.25 content object
+​ ​ ​ 4.1.8.7 native.request.eventtrackers object
 
-​		4.1.26 producer object
+​ ​ 4.1.9 pmp object
 
-​		4.1.27 device object
-		
-​		4.1.28 geo object
-		
-​		4.1.29 user object
-		
-​		4.1.30 data object
-		
-​        4.1.31 segment object
+​ ​ ​ 4.1.9.1 deal object
 
-​		4.2 Bid Response
+​ ​ 4.1.10 site object
 
-​		4.2.1 seatbid object
+​ ​ 4.1.11 app object
 
-​		4.2.2 bid object
+​ ​ 4.1.12 publisher object
 
-​		4.2.3 native ad response
+​ ​ 4.1.13 content object
 
-​		4.2.4 asset response object
+​ ​ ​ 4.1.13.1 content.producer object
 
-​		4.2.5 title object
+​ ​ 4.1.14 imp.ext object
 
-​		4.2.6 Img object
+​ ​ ​ 4.1.14.1 imp.ext.skadn object
 
-​		4.2.7 data object
+​ ​ ​ 4.1.14.2 imp.ext.skadn.skadnetlist object
 
-​		4.2.8 video object
+​ ​ 4.1.15 device object
 
-​		4.2.9 link object
+​ ​ ​ 4.1.15.1 device.ext  object
+
+​ ​ 4.1.16 geo object
+
+​ ​ 4.1.17 user object
+
+​ ​ ​ 4.1.17.1 user.data object
+
+​ ​ ​ 4.1.17.2 user.data.segment object
+
+​ ​ ​ 4.1.17.3 user.ext object
+
+
+​ 4.2 Bid Response
+
+​ ​ 4.2.1 seatbid object
+
+​ ​ 4.2.2 bid object
+
+​ ​ ​ 4.2.2.1 bid.ext object
+
+​ ​ ​ 4.2.2.2 bid.ext.skadn object
+
+​ ​ ​ 4.2.2.3 bid.ext.skadn.fidelities object
+
+​ ​ 4.2.3 native ad response
+
+​ ​ 4.2.4 Assets object
+
+​ ​ 4.2.5 title object
+
+​ ​ 4.2.6 Img object
+
+​ ​ 4.2.7 data object
+
+​ ​ 4.2.8 video object
+
+​ ​ 4.2.9 link object
 
 5 RTB Interface Enumerated Value List
 
@@ -243,76 +264,86 @@ Display / Impression volume is based on the imp. Publisher needs to ensure no re
 
 ## 4.1 Bid Request
 
-| **Parameter name** | **Type**     | **Required?** | **Description**                                                                                                                                                                                                                                                                                                 |
-|:-------------------|:-------------|:--------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| id                 | string       | Yes           | The only identification for Bid Request                                                                                                                                                                                                                                                                         |
-| imp                | object array | Yes           | 1 request can include moret than 1 impression object at a time, which represents a specific ad display placement/position. Details can be found in **imp object** parameter definition below                                                                                                                    |
-| site               | object       | Yes           | Site object info of Publisher, recommended to use only on site instead of website. Details can be found in **site object** parameter definition below                                                                                                                                                           |
-| app                | object       | Yes           | App object info of Publisher, recommended to use only on app instead of website. Details can be found in **app object** parameter definition below                                                                                                                                                              |
-| device             | object       | Yes           | Device info. Details can be found in **device object** parameter definition below                                                                                                                                                                                                                               |
-| user               | object       | Yes           | Device user / Ad audience. Details can be found in **user object** parameter definition below                                                                                                                                                                                                                   |
-| test               | integer      | No            | Indicator of test mode in which auctions are not billable,where 0 = live mode, 1 = test mode  ,default 0                                                                                                                                                                                                        |
-| at                 | integer      | No            | Bid settlement auction type. Value of 1 means it follows First-price auction, while value of 2 means it follows Second-price plus auction, default 2                                                                                                                                                            |
-| tmax               | integer      | No            | Maximum time in milliseconds the exchange allows for bids to be received including Internet latency to avoid timeout                                                                                                                                                                                            |
-| wseat              | string array | No            | White list of buyer seats (e.g., advertisers, agencies) allowed to bid on this impression.                                                                                                                                                                                                                      |
-| bseat              | string array | No            | Block list of buyer seats (e.g., advertisers, agencies) restricted from bidding on this impression.                                                                                                                                                                                                             |
-| allimps            | integer      | No            | Flag to indicate if Exchange can verify that the impressions offered represent all of the impressions available in context(e.g., all on the web page, all video spots such as pre/mid/post roll) to support road-blocking. 0 = no or unknown, 1 = yes, the impressions offered represent all that are available |
-| cur                | string array | No            | Array of allowed currencies for bids on this bid request using ISO-4217 alpha codes. Recommended only if the exchange accepts multiple currencies.                                                                                                                                                              |
-| walng              | string array | No            | White list of languages for creatives using ISO-639-1-alpha-2.                                                                                                                                                                                                                                                  |
-| bcat               | string array | No            | Blocked advertiser categories using the IAB content categories. Refer to List 5.1.                                                                                                                                                                                                                              |
-| badv               | string array | No            | Domain name in blacklist                                                                                                                                                                                                                                                                                        |
-| bapp               | string array | No            | App name in blacklist.On Android, these should be bundle or package names (e.g., com.foo.mygame). On iOS, these are numeric IDs.                                                                                                                                                                                |
-| source             | object       | No            | A Sorce object that provides data about theinventory source. Details can be found in **source object** parameter definition below                                                                                                                                                                               |
-| regs               | object       | No            | Any industry, legal, or governmental regulations in force                                                                                                                                                                                                                                                       |
-| ext                | object       | No            | Placeholder for exchange-specific extensions to OpenRTB                                                                                                                                                                                                                                                         |
+| **Parameter name** | **Type**     | **Required?**        | **Description**                                                                                                                                                                                                                                                                                                 |
+|:-------------------|:-------------|:---------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| id                 | string       | Yes                  | The only identification for Bid Request                                                                                                                                                                                                                                                                         |
+| imp                | object array | Yes                  | 1 request can include moret than 1 impression object at a time, which represents a specific ad display placement/position. Details can be found in **imp object** parameter definition below                                                                                                                    |
+| site               | object       | Yes for site traffic | Site object info of Publisher, recommended to use only on site instead of website. Details can be found in **site object** parameter definition below                                                                                                                                                           |
+| app                | object       | Yes for app traffic  | App object info of Publisher, recommended to use only on app instead of website. Details can be found in **app object** parameter definition below                                                                                                                                                              |
+| device             | object       | Yes                  | Device info. Details can be found in **device object** parameter definition below                                                                                                                                                                                                                               |
+| user               | object       | recommended          | Device user / Ad audience. Details can be found in **user object** parameter definition below                                                                                                                                                                                                                   |
+| test               | integer      | No                   | Indicator of test mode in which auctions are not billable,where 0 = live mode, 1 = test mode  ,default 0                                                                                                                                                                                                        |
+| at                 | integer      | No                   | Bid settlement auction type. Value of 1 means it follows First-price auction, while value of 2 means it follows Second-price plus auction, default 2                                                                                                                                                            |
+| tmax               | integer      | Yes                  | Maximum time in milliseconds the exchange allows for bids to be received including Internet latency to avoid timeout                                                                                                                                                                                            |
+| wseat              | string array | No                   | White list of buyer seats (e.g., advertisers, agencies) allowed to bid on this impression.                                                                                                                                                                                                                      |
+| bseat              | string array | No                   | Block list of buyer seats (e.g., advertisers, agencies) restricted from bidding on this impression.                                                                                                                                                                                                             |
+| allimps            | integer      | No                   | Flag to indicate if Exchange can verify that the impressions offered represent all of the impressions available in context(e.g., all on the web page, all video spots such as pre/mid/post roll) to support road-blocking. 0 = no or unknown, 1 = yes, the impressions offered represent all that are available |
+| cur                | string array | No                   | Array of allowed currencies for bids on this bid request using ISO-4217 alpha codes. Recommended only if the exchange accepts multiple currencies.                                                                                                                                                              |
+| walng              | string array | No                   | White list of languages for creatives using ISO-639-1-alpha-2.                                                                                                                                                                                                                                                  |
+| bcat               | string array | No                   | Blocked advertiser categories using the IAB content categories. Refer to List 5.1.                                                                                                                                                                                                                              |
+| badv               | string array | No                   | Domain name in blacklist                                                                                                                                                                                                                                                                                        |
+| bapp               | string array | No                   | App name in blacklist.On Android, these should be bundle or package names (e.g., com.foo.mygame). On iOS, these are numeric IDs.                                                                                                                                                                                |
+| source             | object       | No                   | A Sorce object that provides data about theinventory source. Details can be found in **source object** parameter definition below                                                                                                                                                                               |
+| regs               | object       | No                   | Any industry, legal, or governmental regulations in force                                                                                                                                                                                                                                                       |
+| ext                | object       | No                   | Placeholder for exchange-specific extensions to OpenRTB                                                                                                                                                                                                                                                         |
+
+ 
+
+****
 
  
 
 ### 4.1.1 source object
 
-| **Parameter name** | **Type**   | **Required?** | **Description**                                                                                                                         |
-|:-------------------|:-----------|:--------------|:----------------------------------------------------------------------------------------------------------------------------------------|
-| fd                 | integer    | No            | Entity responsible for the final impression sale decision, where0 = exchange, 1 = upstream source                                       |
-| tid                | string     | Yes           | Transaction ID that must be common across all participants in this bid request (e.g., potentially multiple exchanges)                   |
-| pchain             | string     | No            | Payment ID chain string containing embedded syntax described in the TAG Payment ID Protocol v1.0                                        |
-| ext                | object     | No            | Placeholder for exchange-specific extensions to OpenRTB .Details can be found in **source Extension object** parameter definition below |
+| **Parameter name** | **Type**   | **Required?** | **Description**                                                                                                                   |
+|:-------------------|:-----------|:--------------|:----------------------------------------------------------------------------------------------------------------------------------|
+| fd                 | integer    | No            | Entity responsible for the final impression sale decision, where0 = exchange, 1 = upstream source                                 |
+| tid                | string     | No            | Transaction ID that must be common across all participants in this bid request (e.g., potentially multiple exchanges)             |
+| pchain             | string     | No            | Payment ID chain string containing embedded syntax described in the TAG Payment ID Protocol v1.0                                  |
+| ext                | object     | No            | Placeholder for exchange-specific extensions to OpenRTB. Details can be found in **source.ext object** parameter definition below |
 
  
 
-### 4.1.2 source extension object
+#### 4.1.1.1 source.ext object
 
-| **Parameter name** | **Type** | **Required?** | **Description**                                                                                              |
-|:-------------------|:---------|:--------------|:-------------------------------------------------------------------------------------------------------------|
-| omidpn             | string   | Yes           | Identifier of the OM SDK integration                                                                         |
-| omidpv             | string   | Yes           | Version of the OM SDK integration                                                                            |
-| schain             | object   | Yes           | Contains the supplychain object.Details can be found in **supplychain object** parameter definition below    |
-
- 
-
-### 4.1.3 supplychain object
-
-| **Parameter name** | **Type**     | **Required?** | **Description**                                                                                                                                                                                                               |
-|:-------------------|:-------------|:--------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| complete           | integer      | Yes           | Flag indicating whether the chain contains all nodes leading back to the source of the inventory, where 0 = no, 1 = yes                                                                                                       |
-| nodes              | opject array | Yes           | Array of objects in the order of placing in the chain. The original source of the request is first and the final seller of the request last.Details can be found in **supplyschain node object** parameter definition below   |
-| ver                | string       | Yes           | Version of the supply chain specification in use. Currently "1.0" is the only option                                                                                                                                          |
+| **参数名称**      | **类型**    | **是否必传**     | **描述**                                                                                                                                                                                                                |
+|:--------------|:----------|:-------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| schain        | object    | recommended  | The object of SupplyChain. The SupplyChain object enables buyers to see all parties who are selling or reselling a given bid request. Details can be found in **source.ext.schain object** parameter definition below |
+| omidpn        | string    | No           | Identifier of the OM SDK integration. This is the same as the "name" parameter of the OMID Partner object.                                                                                                            |
+| omidpv        | string    | No           | Identifier of the OM SDK integration. This is the same as the "name" parameter of the OMID Partner object.                                                                                                            |
 
  
 
-### 4.1.4 supplychain node object
+#### 4.1.1.2 source.ext.schain object
 
-|**Parameter name** |**Type**   | **Required?** | **Description**                                                                                                                                                                                                                                                                                                                           |
-|:----------- -|:--------|:---------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| asi         | string  | Yes      | The canonical domain name of the SSP, Exchange, Header Wrapper, etc system that bidders connect to                                                                                                                                                                                                                               |
-| sid         | string  | Yes      | The identifier associated with the seller or reseller account within the advertising system. In OpenRTB, this is publisher.id.                                                                                                                                                                                                   |
-| hp          | integer | Yes      | Indicates whether this node will be involved in the flow of payment for the inventory.  When set to 1, the advertising system in the asi field pays the seller in the sid field, who is responsible for paying the previous node in the chain.When set to 0, this node is not involved in the flow of payment for the inventory. |
-| rid         | string  | No       | The OpenRTB RequestId of the request as issued by this seller.                                                                                                                                                                                                                                                                   |
-| name        | string  | No       | The business name of the entity represented by this node.                                                                                                                                                                                                                                                                        |
-| domain      | string  | No       | The business domain name of the entity represented by this node.                                                                                                                                                                                                                                                                 |
+| **参数名称**          | **类型**      | **是否必传**            | **描述**                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+|:------------------|:------------|:--------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| complete          | integer     | Yes                 | Flag indicating whether the chain contains all nodesinvolved in the transaction leading back to the owner of the site, app or other medium of the inventory, where 0 = no, 1= yes.                                                                                                                                                                                                                                                                                      |
+| nodes             | object      | Yes                 | Array of SupplyChainNode objects in the order of thechain. In a complete supply chain, the first node represents theinitial advertising system and seller ID involved in thetransaction, i.e. the owner of the site, app, or other medium.In an incomplete supply chain, it represents the first known node. The last node represents the entity sending this bid request. Details can be found in **source.ext.schain.nodes object object** parameter definition below |
+| ver               | string      | Yes                 | Protocol version. Ver 1.0 supported.                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| ext               | object      | No                  | Placeholder for exchange-specific extensions to OpenRTB                                                                                                                                                                                                                                                                                                                                                                                                                 |
 
  
 
-### 4.1.5 regs object
+#### 4.1.1.3 source.ext.schain.nodes object
+
+| **参数名称**          | **类型**      | **是否必传** | **描述**                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+|:------------------|:------------|:---------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| asi               | string      | Yes      | The canonical domain name of the SSP, Exchange, Header Wrapper, etc system that bidders connect to. Thismay be  the operational domain of the system,if that is differentthan the parent corporate domain, to facilitate WHOISand reverse IP lookups to establish clear ownership of thedelegate system. This should be the same value as used to identify sellers in an ads.txtfile if one exists.                                                                                                                                                                                                                                                                                                                          |
+| sid               | string      | Yes      | The identifier associated with the seller or reseller account    within the advertising system. This must contain the same    value used in transactions (i.e. OpenRTB bid requests) in the field specified by the SSP/exchange. Typically, in OpenRTB,   this is publisher.id. For OpenDirect it is typically thepublisher’s organization ID.Should be limited to 64 characters in length.                                                                                                                                                                                                                                                                                                                                  |
+| rid               | string      | No       | The OpenRTB RequestId of the request as issued by this seller.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| name              | string      | No       | The name of the company (the legal entity) that is paid for  inventory transacted under the given seller_id. This value isoptional and should NOT be included if it exists in theadvertising system’s sellers.json file.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| domain            | string      | No       | The business domain name of the entity represented by this node. This value is optional and should NOT be includedif   it exists in the advertising system’s sellers.json file.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| hp                | string      | No       | Indicates whether this node will be involved in the flow of   payment for the inventory. When set to 1, the advertising   system in the asifield pays the seller in thesid field, who isresponsible for paying the previous node inthe chain.When set to 0, this node is not involved in the flow ofpayment for the inventory. For version 1.0 of SupplyChain, this property should always be 1. It is explicitly required to be included as it is expected that future versions of thespecification will introduce non-payment handling nodes.Implementers should ensure that they support this field andpropagate it onwards when constructing SupplyChainobjects in bid requests sent to a downstream advertising system. |
+| ext               | object      | No       | Placeholder for exchange-specific extensions to OpenRTB                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+
+ 
+
+****
+
+ 
+
+### 4.1.2 regs object
 
 | **Parameter name** | **Type**   | **Required?**         | **Description**                                                                                                                                                    |
 |:-------------------|:-----------|:----------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -321,7 +352,7 @@ Display / Impression volume is based on the imp. Publisher needs to ensure no re
 
  
 
-### 4.1.6 regs Extension object
+#### 4.1.2.1 regs.ext object
 
 | **Parameter name** | **Type** | **Required?** | **Description**                                                                         |
 |:-------------------|:---------|:--------------|:----------------------------------------------------------------------------------------|
@@ -330,7 +361,11 @@ Display / Impression volume is based on the imp. Publisher needs to ensure no re
 
  
 
-### 4.1.7 imp object
+****
+
+ 
+
+### 4.1.3 imp object
 
 | **Parameter name**         | **Type**      | **Required?**               | **Description**                                                                                                                                                                                                              |
 |:---------------------------|:--------------|:----------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -341,12 +376,12 @@ Display / Impression volume is based on the imp. Publisher needs to ensure no re
 | audio                      | object        | Yes for Audio traffic       | Refer to **audio object**                                                                                                                                                                                                    |
 | native                     | object        | Yes for Native traffic      | Refer to **native object**                                                                                                                                                                                                   |
 | pmp                        | object        | Yes for private marketplace | A Pmp object containing any privatemarketplace deals in effect for this impression.  Details can be found in **pmp object** parameter definition below                                                                       |
-| displaymanager             | string        | No                          | Name of ad mediation partner, SDK technology, or player responsible for rendering ad (typically video or mobile). Used by some ad servers to customize ad code by partner. Recommended for video and/or apps                 |
-| displaymanagerver          | string        | No                          | Version of ad mediation partner, SDK technology, or player responsible for rendering ad (typically video or mobile). Used by some ad servers to customize ad code by partner. Recommended for video and/or apps              |
+| displaymanager             | string        | Yes                         | Name of ad mediation partner, SDK technology, or player responsible for rendering ad (typically video or mobile). Used by some ad servers to customize ad code by partner. Recommended for video and/or apps                 |
+| displaymanagerver          | string        | Yes                         | Version of ad mediation partner, SDK technology, or player responsible for rendering ad (typically video or mobile). Used by some ad servers to customize ad code by partner. Recommended for video and/or apps              |
 | instl                      | integer       | No                          | 1 = the ad is interstitial or full screen, 0 = not interstitial                                                                                                                                                              |
-| tagid                      | string        | No                          | Fixed identification of each specific ad display placement/position                                                                                                                                                          |
-| bidfloor                   | float         | No                          | Minimum CPM bid price for this display traffic  , default 0                                                                                                                                                                  |
-| bidfloorcur                | string        | No                          | Bid price currency, default "USD"                                                                                                                                                                                            |
+| tagid                      | string        | Yes                         | Fixed identification of each specific ad display placement/position                                                                                                                                                          |
+| bidfloor                   | float         | Yes                         | Minimum CPM bid price for this display traffic  , default 0                                                                                                                                                                  |
+| bidfloorcur                | string        | Yes                         | Bid price currency, default "USD"                                                                                                                                                                                            |
 | clickbrowser               | integer       | No                          | Indicates the type of browser opened upon clicking the creative in an app, where 0 = embedded, 1 = native                                                                                                                    |
 | secure                     | integer       | No                          | Parameter to indicate if Bid Request needs HTTPS encrypted info and markup to ensure data privacy.Value of 0 means it doesn't need. Value of 1 means it needs. If left blank, means unknown, i.e. it doesn't need encryption |
 | iframebuster               | string array  | No                          | Array of exchange-specific names of supported iframe busters                                                                                                                                                                 |
@@ -355,20 +390,30 @@ Display / Impression volume is based on the imp. Publisher needs to ensure no re
 
  
 
-### 4.1.8 metric object
+****
+
+ 
+
+### 4.1.4 metric object
+
 | **Parameter name** | **Type**      | **Required?** | **Description**                                                                                                                                                                             |
 |:-------------------|:--------------|:--------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| type               | string        | Yes           | Type of metric being presented using exchange curated string names which should be published to bidders a priori                                                                            |
-| value              | float         | Yes           | Number representing the value of the metric. Probabilities must be in the range 0.0 – 1.0                                                                                                   |
-| vendor             | string        | Yes           | Source of the value using exchange curated string names which should be published to bidders a priori. If the exchange itself is the source versus a third party, “EXCHANGE” is recommended |
+| type               | string        | No            | Type of metric being presented using exchange curated string names which should be published to bidders a priori                                                                            |
+| value              | float         | No            | Number representing the value of the metric. Probabilities must be in the range 0.0 – 1.0                                                                                                   |
+| vendor             | string        | No            | Source of the value using exchange curated string names which should be published to bidders a priori. If the exchange itself is the source versus a third party, “EXCHANGE” is recommended |
 | ext                | object        | No            | Placeholder for exchange-specific extensions to OpenRTB                                                                                                                                     |
 
  
 
-### 4.1.9 banner object
+****
+
+ 
+
+### 4.1.5 banner object
+
 | **Parameter name** | **Type**       | **Required?** | **Description**                                                                                                                                                                                                                                |
 |:-------------------|:---------------|:--------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| format             | object array   | 否             | Array of format objects (Section 3.2.10) representing the banner sizes permitted. If none are specified, then use of the h and w attributes is highly recommended. Refer to **format object**                                                  |
+| format             | object array   | No            | Array of format objects (Section 3.2.10) representing the banner sizes permitted. If none are specified, then use of the h and w attributes is highly recommended. Refer to **format object**                                                  |
 | w                  | integer        | Yes           | Exact width in device independent pixels (DIPS); If not specified wmin and wmax , this value refers to the required display width, otherwise refers to the desired width                                                                       |
 | h                  | integer        | Yes           | Exact height in device independent pixels (DIPS); If not specified hmin and hmax , this value refers to the required display height, otherwise refers to the desired height                                                                    |
 | wmax               | integer        | No            | Deprecated in favor of the format array. Maximum width in device independent pixels (DIPS)                                                                                                                                                     |
@@ -378,7 +423,7 @@ Display / Impression volume is based on the imp. Publisher needs to ensure no re
 | btype              | integer array  | No            | Blocked banner ad types. Refer to List 5.2.                                                                                                                                                                                                    |
 | battr              | integer array  | No            | Blocked creative attributes. Refer to List 5.3.                                                                                                                                                                                                |
 | pos                | integer        | No            | Ad position on screen. Refer to List 5.4.                                                                                                                                                                                                      |
-| mimes              | string array   | No            | Content MIME types supported. Popular MIME types may include "application/x-shockwave-flash", “image/jpg”, and “image/gif”                                                            |
+| mimes              | string array   | Yes           | Content MIME types supported. Popular MIME types may include "application/x-shockwave-flash", “image/jpg”, and “image/gif”                                                                                                                     |
 | topframe           | integer        | No            | Indicates if the banner is in the top frame as opposed to an iframe, where 0 = no, 1 = yes                                                                                                                                                     |
 | expdir             | integer array  | No            | Directions in which the banner may expand. Refer to List 5.5                                                                                                                                                                                   |
 | api                | integer array  | No            | List of supported API frameworks for this impression. Refer to List 5.6. If an API is not explicitly listed, it is assumed not to be supported                                                                                                 |
@@ -388,7 +433,8 @@ Display / Impression volume is based on the imp. Publisher needs to ensure no re
 
  
 
-### 4.1.10 format object
+#### 4.1.5.1 banner.format object
+
 | **Parameter name** | **Type**       | **Required?**   | **Description**                                                                                                                                                             |
 |:-------------------|:---------------|:----------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | w                  | integer        | Yes             | Exact width in device independent pixels (DIPS); If not specified wmin and wmax , this value refers to the required display width, otherwise refers to the desired width    |
@@ -400,14 +446,18 @@ Display / Impression volume is based on the imp. Publisher needs to ensure no re
 
  
 
-### 4.1.11 video object
+****
+
+ 
+
+### 4.1.6 video object
 
 | **Parameter name** | **Type**      | **Required?** | **Description**                                                                                                                                                                                                                                                                            |
 |:-------------------|:--------------|:--------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | mimes              | string array  | Yes           | Supported content mime-type. Currently it only supports ‘video/mp4’                                                                                                                                                                                                                        |
-| minduration        | integer       | Yes           | Minimum video ad length. Unit is in seconds                                                                                                                                                                                                                                                |
-| maxduration        | integer       | Yes           | Maximum video ad length. Unit is in seconds                                                                                                                                                                                                                                                |
-| protocols          | integer array | Yes           | Applicable video protocol for Publisher in Bid Response.   Refer to List 5.8.                                                                                                                                                                                                              |
+| minduration        | integer       | recommended   | Minimum video ad length. Unit is in seconds                                                                                                                                                                                                                                                |
+| maxduration        | integer       | recommended   | Maximum video ad length. Unit is in seconds                                                                                                                                                                                                                                                |
+| protocols          | integer array | recommended   | Applicable video protocol for Publisher in Bid Response.   Refer to List 5.8.                                                                                                                                                                                                              |
 | protocol           | integer       | DEPRECATED    | Applicable video protocol for Publisher in Bid Response. Refer to List 5.8.                                                                                                                                                                                                                |
 | w                  | integer       | Yes           | Width of the video player in device independent pixels (DIPS)                                                                                                                                                                                                                              |
 | h                  | integer       | Yes           | Height of the video player in device independent pixels (DIPS)                                                                                                                                                                                                                             |
@@ -434,14 +484,18 @@ Display / Impression volume is based on the imp. Publisher needs to ensure no re
 
  
 
-### 4.1.12 audio object
+****
+
+ 
+
+### 4.1.7 audio object
 
 | **Parameter name**  | **Type**       | **Required?** | **Description**                                                                                                                                                                                                                                                                                        |
 |:--------------------|:---------------|:--------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | mimes               | string array   | Yes           | Supported content mime-type. Currently it only supports “audio/ mp4”                                                                                                                                                                                                                                   |
-| minduration         | integer        | Yes           | Minimum audio ad length. Unit is in seconds                                                                                                                                                                                                                                                            |
-| maxduration         | integer        | Yes           | Maximum audio ad length. Unit is in seconds                                                                                                                                                                                                                                                            |
-| protocols           | integer array  | Yes           | Applicable audio protocol for Publisher in Bid Response.   Refer to List 5.8.                                                                                                                                                                                                                          |
+| minduration         | integer        | recommended   | Minimum audio ad length. Unit is in seconds                                                                                                                                                                                                                                                            |
+| maxduration         | integer        | recommended   | Maximum audio ad length. Unit is in seconds                                                                                                                                                                                                                                                            |
+| protocols           | integer array  | recommended   | Applicable audio protocol for Publisher in Bid Response.   Refer to List 5.8.                                                                                                                                                                                                                          |
 | protocol            | integer        | DEPRECATED    | Applicable audio protocol for Publisher in Bid Response. Refer to List 5.8.                                                                                                                                                                                                                            |
 | startdelay          | integer        | No            | Indicates the start delay in seconds for pre-roll, mid-roll, or post-roll ad placements. Refer to List 5.12 for additional generic values                                                                                                                                                              |
 | sequence            | integer        | No            | If multiple ad impressions are offered in the same bid request, the sequence number will allow for the coordinated delivery of multiple creatives                                                                                                                                                      |
@@ -461,11 +515,15 @@ Display / Impression volume is based on the imp. Publisher needs to ensure no re
 
  
 
-### 4.1.13 native object
+****
+
+ 
+
+### 4.1.8 native object
 
 | **Parameter name**  | **Type**      | **Required?** | **Description**                                                                                                                                                                                              |
 |:--------------------|:--------------|:--------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| request             | string        | Yes           | Request must follow Native ad specification. Refer to **native request object** for details                                                                                                                  |
+| request             | string        | Yes           | Request must follow Native ad specification. Refer to **native.request object** for details                                                                                                                  |
 | ver                 | string        | Yes           | Use Dynamic Native Ads API version, default version is 1.0                                                                                                                                                   |
 | api                 | integer array | No            | Supported API frame of the display. Section **5.6 API frame** is the reference of its enumerated values. Default setting of this parameter is that it doesn't support any enumerated value, unless specified |
 | battr               | integer array | No            | Restrictions of material attributes. Section **5.3 Creative attribute list** is the reference of its enumerated values                                                                                       |
@@ -473,7 +531,24 @@ Display / Impression volume is based on the imp. Publisher needs to ensure no re
 
  
 
-### 4.1.14 native request object
+#### 4.1.8.1 native.request object
+
+| **Parameter name** | **Type**       | **Required?** | **Description**                                                                                                                                                                  |
+|:-------------------|:---------------|:--------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| assets             | object array   | Yes           | Use **native.request.asset object** to show the requirement of Native ad for assets and other elements. All assets and other elements should follow this request object          |
+| ver                | string         | Yes           | Native Markup version, default version is 1.0                                                                                                                                    |
+| context            | integer        | recommended   | The context in which the ad appears. See Table of Context IDs for a list of supported context types.                                                                             |
+| contextsubtype     | integer        | No            | A more detailed context in which the ad appears. See Table of Context SubType IDs below for a list of supported context subtypes.                                                |
+| plcmttype          | integer        | recommended   | The design/format/layout of the ad unit being offered. See Table of Placement Type IDs for a list of supported placement types.                                                  |
+| aurlsupport        | integer        | No            | Whether the supply source / impression supports returning an assetsurl instead of an asset object. 0 or the absence of the field indicates no such support.                      |
+| durlsupport        | integer        | No            | Whether the supply source / impression supports returning a dco url instead of an asset object. 0 or the absence of the field indicates no such support. Beta feature.           |
+| eventtrackers      | object array   | No            | Specifies what type of eventtracking is supported. Refer to **native.request.eventtrackers object** for details                                                                  |
+| privacy            | integer        | recommended   | Set to 1 when the native ad supports buyer-specific privacy notice. Set to 0 (or field absent) when the native ad doesn’t support custom privacy links or if support is unknown. |
+| ext                | object         | No            | Placeholder for exchange-specific extensions to OpenRTB                                                                                                                          |
+
+ 
+
+#### 4.1.8.2 native.request.asset object
 
 | **Parameter name** | **Type**     | **Required?** | **Description**                                                                                                                                                  |
 |:-------------------|:-------------|:--------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -482,12 +557,9 @@ Display / Impression volume is based on the imp. Publisher needs to ensure no re
 
  
 
-### 4.1.15 asset request object 
-
-| **Parameter name** | **Type** | **Required?** | **Description**                                                                                                                                            |
-|:-------------------|:---------|:--------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------|
-| id                 | integer  | Yes           | The only identification ID of the object                                                                                                                   |
-| required           | integer  | Yes           | Indicate if the asset object is a must-have for client (bidder) in order to get a bid accepted. Value of 1 means yes. Value of 0 means it is not necessary |
+#### 4.1.8.3 native.request.asset.title object
+| **Parameter name** | **Type** | **Required?** | **Description**                                                               |
+|:-------------------|:---------|:--------------|:----------------------------------------------------------- -------------------|
 | title              | object   | No            | Title object for title assets. Refer to **title object**                                                                                                   |
 | img                | object   | No            | Image object for image assets. Refer to **img object**                                                                                                     |
 | video              | object   | No            | Video object for video assets. Refer to **video object**                                                                                                   |
@@ -495,15 +567,7 @@ Display / Impression volume is based on the imp. Publisher needs to ensure no re
 
  
 
-### 4.1.16 title object 
-
-| **Parameter name** | **Type** | **Required?** | **Description**                                                               |
-|:-------------------|:---------|:--------------|:------------------------------------------------------------------------------|
-| len                | integer  | Yes           | Maximum title text length. Recommended text length is 25, 90, 140 characters  |
-
- 
-
-### 4.1.17 img object 
+#### 4.1.8.4 native.request.asset.img object
 
 | **Parameter name** | **Type**     | **Required?** | **Description**                                                                    |
 |:-------------------|:-------------|:--------------|:-----------------------------------------------------------------------------------|
@@ -516,7 +580,7 @@ Display / Impression volume is based on the imp. Publisher needs to ensure no re
 
  
 
-### 4.1.18 video object 
+#### 4.1.8.5 native.request.asset.video object
 
 | **Parameter name** | **Type**      | **Required?** | **Description**                                                           |
 |:-------------------|:--------------|:--------------|:--------------------------------------------------------------------------|
@@ -527,7 +591,7 @@ Display / Impression volume is based on the imp. Publisher needs to ensure no re
 
  
 
-### 4.1.19 data object 
+#### 4.1.8.6 native.request.asset.data object
 
 | **Parameter name** | **Type**     | **Required?** | **Description**                                                                                                                                |
 |:-------------------|:-------------|:--------------|:-----------------------------------------------------------------------------------------------------------------------------------------------|
@@ -536,7 +600,21 @@ Display / Impression volume is based on the imp. Publisher needs to ensure no re
 
  
 
-### 4.1.20 pmp object
+#### 4.1.8.7 native.request.eventtrackers object
+
+| **参数名称**    | **类型**        | **是否必传** | **描述**                                                                                          |
+|:------------|:--------------|:---------|:------------------------------------------------------------------------------------------------|
+| event       | integer       | Yes      | Type of event available for tracking. See Event Types table.                                    |
+| methods     | integer array | Yes      | Array of the types of tracking available for the given event. See Event Tracking Methods table. |
+| ext         | object        | No       | Placeholder for exchange-specific extensions to OpenRTB                                         |
+
+ 
+
+****
+
+ 
+
+### 4.1.9 pmp object
 
 | **Parameter name** | **Type**        | **Required?** | **Description**                                                                                                                                                                                |
 |:-------------------|:----------------|:--------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -546,7 +624,7 @@ Display / Impression volume is based on the imp. Publisher needs to ensure no re
 
  
 
-### 4.1.21 deal object
+#### 4.1.9.1 deal object
 
 | **Parameter name** | **Type**      | **Required?** | **Description**                                                                                                                                                                 |
 |:-------------------|:--------------|:--------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -560,11 +638,15 @@ Display / Impression volume is based on the imp. Publisher needs to ensure no re
 
  
 
-### 4.1.22 site object
+****
+
+ 
+
+### 4.1.10 site object
 
 | **Parameter name** | **Type**        | **Required?** | **Description**                                                                                                   |
 |:-------------------|:----------------|:--------------|:------------------------------------------------------------------------------------------------------------------|
-| id                 | string          | Yes           | Exchange definition of Site ID                                                                                    |
+| id                 | string          | recommended   | Exchange definition of Site ID                                                                                    |
 | name               | string          | No            | Site name                                                                                                         |
 | domain             | string          | No            | Domain of the site (e.g., “mysite.foo.com”)                                                                       |
 | cat                | string array    | No            | Array of IAB content categories of the site. Refer to List 5.1                                                    |
@@ -574,7 +656,7 @@ Display / Impression volume is based on the imp. Publisher needs to ensure no re
 | ref                | string          | No            | Referrer URL that caused navigation to the current page                                                           |
 | search             | string          | No            | Search string that caused navigation to the current page                                                          |
 | mobile             | integer         | No            | Indicates if the site has been programmed to optimize layout when viewed on mobile devices, where 0 = no, 1 = yes |
-| privacypolicy      | integer         | No            | Indicates if the site has a privacy policy, where 0 = no, 1 = yes                                                 |
+| privacypolicy      | integer         | recommended   | Indicates if the site has a privacy policy, where 0 = no, 1 = yes                                                 |
 | publisher          | object          | No            | Details about the Publisher of the site. Refer to **publisher object**                                            |
 | content            | object          | No            | Details about the Content within the site. Refer to **content object**                                            |
 | keywords           | string          | No            | Comma separated list of keywords about the site                                                                   |
@@ -582,42 +664,53 @@ Display / Impression volume is based on the imp. Publisher needs to ensure no re
 
  
 
-### 4.1.23 app object 
+****
+
+ 
+
+### 4.1.11 app object
 
 | **Parameter name** | **Type**       | **Required?** | **Description**                                                                                       |
 |:-------------------|:---------------|:--------------|:------------------------------------------------------------------------------------------------------|
-| id                 | string         | Yes           | Exchange  definition of App ID                                                                        |
+| id                 | string         | recommended   | Exchange  definition of App ID                                                                        |
 | name               | string         | No            | App name                                                                                              |
 | bundle             | string         | Yes           | App package name info                                                                                 |
-| domain             | string         | No            | App domain name, eg. mygame.foo.com                                                                   |
-| storeurl           | string         | No            | App store URL for an installed app; for IQG 2.1 compliance                                            |
-| cat                | string array   | No            | App IAB category.Section **5.1 IAB category** is the reference of its enumerated values               |
+| domain             | string         | recommended   | App domain name, eg. mygame.foo.com                                                                   |
+| storeurl           | string         | recommended   | App store URL for an installed app; for IQG 2.1 compliance                                            |
+| cat                | string array   | recommended   | App IAB category.Section **5.1 IAB category** is the reference of its enumerated values               |
 | sectioncat         | string array   | No            | Array of IAB content categories that describe the currentsection of the site. Refer to List 5.1       |
 | pagecat            | string array   | No            | Array of IAB content categories that describe the current page or view of the site. Refer to List 5.1 |
-| ver                | string         | No            | App version                                                                                           |
-| privacypolicy      | integer        | No            | Indicates if the app has a privacy policy, where 0 = no, 1 = yes                                      |
-| publisher          | object         | No            | Details about the Publisher of the app. Refer to **publisher object**                                 |
+| ver                | string         | Yes           | App version                                                                                           |
+| privacypolicy      | integer        | recommended   | Indicates if the app has a privacy policy, where 0 = no, 1 = yes                                      |
+| publisher          | object         | recommended   | Details about the Publisher of the app. Refer to **publisher object**                                 |
+| paid               | integer        | No            | 0 = app is free, 1 = the app is a paid version.                                                       |
 | content            | object         | No            | Details about the Content within the app. Refer to **content object**                                 |
 | keywords           | string         | No            | Comma separated list of keywords about the app                                                        |
 | ext                | object         | No            | Placeholder for exchange-specific extensions to OpenRTB                                               |
 
  
 
-### 4.1.24 publisher object 
-
-| **Parameter name** | **Type**       | **Required?**   | **Description**                                                                         |
-|:-------------------|:---------------|:----------------|:----------------------------------------------------------------------------------------|
-| id                 | string         | Yes             | Publisher ID, to apply for token info                                                   |
-| name               | string         | No              | Publisher name                                                                          |
-| domain             | string         | No              | Publisher's highest domain name, eg. ‘publisher.com’                                    |
-| cat                | string array   | No              | Array of IAB content categories that describe the publisher.Refer to List 5.1           |
-| ext                | object         | No              | Placeholder for exchange-specific extensions to OpenRTB                                 |
-
-
+****
 
  
 
-### 4.1.25 content object
+### 4.1.12 publisher object
+
+| **Parameter name** | **Type**       | **Required?** | **Description**                                                                         |
+|:-------------------|:---------------|:--------------|:----------------------------------------------------------------------------------------|
+| id                 | string         | Yes           | Publisher ID, to apply for token info                                                   |
+| name               | string         | recommended   | Publisher name                                                                          |
+| domain             | string         | No            | Publisher's highest domain name, eg. ‘publisher.com’                                    |
+| cat                | string array   | recommended   | Array of IAB content categories that describe the publisher.Refer to List 5.1           |
+| ext                | object         | No            | Placeholder for exchange-specific extensions to OpenRTB                                 |
+
+ 
+
+****
+
+ 
+
+### 4.1.13 content object
 
 | **Parameter name**  | **Type**      | **Required?** | **Description**                                                                                                |
 |:--------------------|:--------------|:--------------|:---------------------------------------------------------------------------------------------------------------|
@@ -650,7 +743,7 @@ Display / Impression volume is based on the imp. Publisher needs to ensure no re
 
  
 
-### 4.1.26 producer object
+#### 4.1.13.1 content.producer object
 
 | **Parameter name** | **Type**       | **Required?**   | **Description**                                                                        |
 |:-------------------|:---------------|:----------------|:---------------------------------------------------------------------------------------|
@@ -662,45 +755,100 @@ Display / Impression volume is based on the imp. Publisher needs to ensure no re
 
  
 
-### 4.1.27 device object 
-
-| **Parameter name** | **Type**  | **Required?** | **Description**                                                                                                                                                  |
-|:-------------------|:----------|:--------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| ua                 | string    | Yes           | User-Agent field in HTTP request thread of user device                                                                                                           |
-| geo                | object    | Yes           | Current geographic info of user. Refer to **geo object**                                                                                                         |
-| dnt                | integer   | Yes           | ‘Do Not Track’ identification set by browser in HTTP thread. Value of 0 means tracking is not restricted. Value of 1 means tracking is restricted / not allowed. |
-| lmt                | integer   | Yes           | Indicate user's authorization for ad tracking. Value of 0 means tracking is not restricted. Value of 1 means tracking is restricted / not allowed.               |
-| ip                 | string    | Yes           | ipv4 address of user's current network                                                                                                                           |
-| ipv6               | string    | No            | ipv6 address of user's current network                                                                                                                           |
-| devicetype         | integer   | No            | Device type. Section **5.21 Device type** is the reference of its enumerated values                                                                              |
-| make               | string    | No            | Device manufacturer (eg. ‘Apple’)                                                                                                                                |
-| model              | string    | No            | Device model (eg. ‘iPhone’)                                                                                                                                      |
-| os                 | string    | No            | Operation system (eg. Android, iOS)                                                                                                                              |
-| osv                | string    | No            | Operation system version                                                                                                                                         |
-| hwv                | integer   | No            | Hardware version of the device (e.g., “5S” for iPhone 5S)                                                                                                        |
-| h                  | integer   | No            | Screen physical height / length.Unit is in pixels                                                                                                                |
-| w                  | integer   | No            | Screen physical width.Unit is in pixels                                                                                                                          |
-| ppi                | integer   | No            | Screen size.Unit is in pixel per inch                                                                                                                            |
-| pxratio            | float     | No            | The ratio of physical pixels to device independent pixels                                                                                                        |
-| js                 | integer   | No            | Indicate if js is supported. Value of 0 means not supported. Value of 1 means supported.                                                                         |
-| geofetch           | integer   | No            | Indicates if the geolocation API will be available to JavaScript code running in the banner, where 0 = no, 1 = yes                                               |
-| flashver           | string    | No            | Version of Flash supported by the browser                                                                                                                        |
-| language           | string    | No            | Device language, following ISO-639-1-alpha-2. If unknown, put ‘unknown’                                                                                          |
-| carrier            | string    | No            | Carrier or ISP (e.g., “VERIZON”) using exchange curated string names which should be published to bidders a priori.                                              |
-| mccmnc             | string    | No            | Mobile network carrier                                                                                                                                           |
-| connectiontype     | integer   | No            | Network connection mode. Section **5.8 Network Connection Mode** is the reference of its enumerated values                                                       |
-| ifa                | string    | No            | Identification used by client.Andorid: gaid, iOS: idfa                                                                                                           |
-| didsha1            | string    | No            | Hardware device ID (eg. IMEI), via SHA1 hash                                                                                                                     |
-| didmd5             | string    | No            | Hardware device ID (eg. IMEI), via MD5 hash                                                                                                                      |
-| dpidsha1           | string    | No            | Platform device ID (eg. Android ID), via SHA1 hash                                                                                                               |
-| dpidmd5            | string    | No            | Platform device ID (eg. Android ID), via MD5 hash                                                                                                                |
-| macsha1            | string    | No            | Device MAC address, via SHA1 hash                                                                                                                                |
-| macmd5             | string    | No            | Device MAC address, via MD5 hash                                                                                                                                 |
-| ext                | object    | No            | Placeholder for exchange-specific extensions to OpenRTB                                                                                                          |
+****
 
  
 
-### 4.1.28 geo object 
+### 4.1.14 imp.ext object
+
+| **参数名称**          | **类型**     | **是否必传**  | **描述**                                                                               |
+|:------------------|:-----------|:----------|:-------------------------------------------------------------------------------------|
+| deeplink          | integer    | No        | Flag to indicate if deeplink is supported, where 0 = not supported, 1 = supported.   |
+| skadn             | object     | No        | Apple iOS 14 SkAdNetwork related data ,information for creating a signature.         |
+| rewarded          | integer    | No        | 1 = The ad is reward video; 0 = not reward video.                                    |
+| fallback          | integer    | No        | Flag to indicate if fallback is supported, where 0 = not supported, 1 = supported.   |
+
+ 
+
+#### 4.1.14.1 imp.ext.skadn object
+
+| **参数名称**           | **类型**       | **是否必传**  | **描述**                                                                                    |
+|:-------------------|:-------------|:----------|:------------------------------------------------------------------------------------------|
+| versions           | string array | Yes       | Array of strings containing the supported skadnetwork versions.                           |
+| version            | string       | No        | Version of skad network supported.                                                        |
+| sourceapp          | string       | Yes       | Publisher app's AppStore ID                                                               |
+| skadnetids         | string array | Yes       | A subset of publisher's SKAdNetwork ID configured in info.plist.                          |
+| skadnetlist        | object       | No        | Object containing the IABTL list definition.Refer to **imp.ext.skadn.skadnetlist object** |
+| ext                | object       | No        | laceholder for exchange-specific extensions to OpenRTB                                    |
+
+ 
+
+### 4.1.14.2 imp.ext.skadn.skadnetlist object
+
+| **参数名称**      | **类型**        | **是否必传** | **描述**                                                                                                                  |
+|:--------------|:--------------|:---------|:------------------------------------------------------------------------------------------------------------------------|
+| max           | integer       | 否        | IABTL list containing the max entry ID of SKAdNetwork ID.                                                               |
+| excl          | integer array | 否        | Comma separated list of integer IABTL registration IDs to be excluded from IABTL shared list.                           |
+| addl          | string array  | 否        | Comma separated list of string SKAdNetwork IDs,expressed as lowercase strings, not included in the IABTL shared list.   |
+
+ 
+
+****
+
+ 
+
+### 4.1.15 device object 
+
+| **Parameter name** | **Type**  | **Required?**        | **Description**                                                                                                                                                  |
+|:-------------------|:----------|:---------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ua                 | string    | Yes                  | User-Agent field in HTTP request thread of user device                                                                                                           |
+| geo                | object    | Yes                  | Current geographic info of user. Refer to **geo object**                                                                                                         |
+| dnt                | integer   | recommended          | ‘Do Not Track’ identification set by browser in HTTP thread. Value of 0 means tracking is not restricted. Value of 1 means tracking is restricted / not allowed. |
+| lmt                | integer   | recommended          | Indicate user's authorization for ad tracking. Value of 0 means tracking is not restricted. Value of 1 means tracking is restricted / not allowed.               |
+| ip                 | string    | Yes for ipv4 network | ipv4 address of user's current network                                                                                                                           |
+| ipv6               | string    | Yes for ipv6 network | ipv6 address of user's current network                                                                                                                           |
+| devicetype         | integer   | recommended          | Device type. Section **5.21 Device type** is the reference of its enumerated values                                                                              |
+| make               | string    | recommended          | Device manufacturer (eg. ‘Apple’)                                                                                                                                |
+| model              | string    | recommended          | Device model (eg. ‘iPhone’)                                                                                                                                      |
+| os                 | string    | recommended          | Operation system (eg. Android, iOS)                                                                                                                              |
+| osv                | string    | recommended          | Operation system version                                                                                                                                         |
+| hwv                | integer   | No                   | Hardware version of the device (e.g., “5S” for iPhone 5S)                                                                                                        |
+| h                  | integer   | recommended          | Screen physical height / length.Unit is in pixels                                                                                                                |
+| w                  | integer   | recommended          | Screen physical width.Unit is in pixels                                                                                                                          |
+| ppi                | integer   | No                   | Screen size.Unit is in pixel per inch                                                                                                                            |
+| pxratio            | float     | No                   | The ratio of physical pixels to device independent pixels                                                                                                        |
+| js                 | integer   | No                   | Indicate if js is supported. Value of 0 means not supported. Value of 1 means supported.                                                                         |
+| geofetch           | integer   | No                   | Indicates if the geolocation API will be available to JavaScript code running in the banner, where 0 = no, 1 = yes                                               |
+| flashver           | string    | No                   | Version of Flash supported by the browser                                                                                                                        |
+| language           | string    | No                   | Device language, following ISO-639-1-alpha-2. If unknown, put ‘unknown’                                                                                          |
+| carrier            | string    | recommended          | Carrier or ISP (e.g., “VERIZON”) using exchange curated string names which should be published to bidders a priori.                                              |
+| mccmnc             | string    | recommended          | Mobile network carrier                                                                                                                                           |
+| connectiontype     | integer   | recommended          | Network connection mode. Section **5.8 Network Connection Mode** is the reference of its enumerated values                                                       |
+| ifa                | string    | recommended          | Identification used by client.Andorid: gaid, iOS: idfa                                                                                                           |
+| didsha1            | string    | No                   | Hardware device ID (eg. IMEI), via SHA1 hash                                                                                                                     |
+| didmd5             | string    | No                   | Hardware device ID (eg. IMEI), via MD5 hash                                                                                                                      |
+| dpidsha1           | string    | No                   | Platform device ID (eg. Android ID), via SHA1 hash                                                                                                               |
+| dpidmd5            | string    | No                   | Platform device ID (eg. Android ID), via MD5 hash                                                                                                                |
+| macsha1            | string    | No                   | Device MAC address, via SHA1 hash                                                                                                                                |
+| macmd5             | string    | No                   | Device MAC address, via MD5 hash                                                                                                                                 |
+| ext                | object    | No                   | Placeholder for exchange-specific extensions to OpenRTB. Refer to **device.ext object**                                                                          |
+
+ 
+
+### 4.1.15.1 device.ext  object
+
+| **参数名称**   | **类型**    | **是否必传** | **描述**                                                                                                                                 |
+|:-----------|:----------|:---------|:---------------------------------------------------------------------------------------------------------------------------------------|
+| ifv        | string    | No       | IDFV for iOS device in ad serving APP.                                                                                                 |
+| atts       | integer   | No       | Flag indicates the ad tracking authorization status on iOS device, where 0 = not determined; 1 = restricted; 2=denied; 3 = authorized. |
+
+ 
+
+****
+
+ 
+
+### 4.1.16 geo object
 
 | **Parameter name** | **Type**   | **Required?** | **Description**                                                                                                                                                                                              |
 |:-------------------|:-----------|:--------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -721,7 +869,38 @@ Display / Impression volume is based on the imp. Publisher needs to ensure no re
 
  
 
-### 4.1.29 user object 
+****
+
+ 
+
+### 4.1.17 user object
+
+| **Parameter name** | **Type**     | **Required?** | **Description**                                                                       |
+|:-------------------|:-------------|:--------------|:--------------------------------------------------------------------------------------|
+| id                 | string       | No            | User ID                                                                               |
+| buyeruid           | string       | No            | User ID defined by buyer                                                              |
+| gender             | string       | No            | Gender. Value of M means male, F means female, 0 means other gender.                  |
+| geo                | object       | No            | User geo info                                                                         |
+| yob                | integer      | No            | Year of birth, 4-digit number.                                                        |
+| keywords           | string       | No            | Keywords list of user's interests / intentions list, separated by comma (,)           |
+| customdata         | string       | No            | Customized data                                                                       |
+| data               | object array | No            | Extra user data. Each data object represents a different data source                  |
+| ext                | object       | No            | Placeholder for exchange-specific extensions to OpenRTB. Refer to **user.ext object** |
+
+ 
+
+#### 4.1.17.1 user.data object
+
+| **Parameter name** | **Type**     | **Required?** | **Description**                                                                       |
+|:-------------------|:-------------|:--------------|:--------------------------------------------------------------------------------------|
+| id                 | string       | No            | ID of data provider                                                                   |
+| name               | string       | No            | Name of data provider                                                                 |
+| segment            | object array | No            | Data segment that includes the actual data info.Refer to **user.data.segment object** |
+| ext                | object       | No            | Placeholder for exchange-specific extensions to OpenRTB                               |
+
+ 
+
+#### 4.1.17.2 user.data.segment object
 
 | **Parameter name** | **Type**     | **Required?** | **Description**                                                             |
 |:-------------------|:-------------|:--------------|:----------------------------------------------------------------------------|
@@ -737,29 +916,15 @@ Display / Impression volume is based on the imp. Publisher needs to ensure no re
 
  
 
-### 4.1.30 data object 
+#### 4.1.17.3 user.ext object
 
-| **Parameter name** | **Type**     | **Required?** | **Description**                                                             |
-|:-------------------|:-------------|:--------------|:----------------------------------------------------------------------------|
-| id                 | string       | No            | ID of data provider                                                         |
-| name               | string       | No            | Name of data provider                                                       |
-| segment            | object array | No            | Data segment that includes the actual data info.Refer to **segment object** |
-| ext                | object       | No            | Placeholder for exchange-specific extensions to OpenRTB                     |
-
-
+| **参数名称**        | **类型**     | **是否必传** | **描述**              |
+|:----------------|:-----------|:---------|:--------------------|
+| consent         | integer    | No       | 用户是否授权所有相关方使用个人数据标识 |
 
  
 
-### 4.1.31 segment object 
-
-| **Parameter name** | **Type**     | **Required?** | **Description**                                         |
-|:-------------------|:-------------|:--------------|:--------------------------------------------------------|
-| id                 | string       | No            | Segment ID defined by data provider                     |
-| name               | string       | No            | Segment name defined by data provider                   |
-| value              | string       | No            | Segment value                                           |
-| ext                | object       | No            | Placeholder for exchange-specific extensions to OpenRTB |
-
-
+****
 
  
 
@@ -777,6 +942,12 @@ Display / Impression volume is based on the imp. Publisher needs to ensure no re
 | nbr                | integer      | No            | Reason for not bidding. Refer to List 5.24                                                |
 | ext                | object       | No            | Placeholder for bidder-specific extensions to OpenRTB                                     |
 
+ 
+
+****
+
+ 
+
 ### 4.2.1 seatbid object
 
 | **Parameter name** | **Type**      | **Required?** | **Description**                                                                                                                                                               |
@@ -785,6 +956,10 @@ Display / Impression volume is based on the imp. Publisher needs to ensure no re
 | seat               | string        | No            | Seat identification that represents the client (bidder, eg. advertiser, agency) on whose behalf this bid is made                                                              |
 | group              | interger      | No            | Indicate if all bids can win or fail at the same time. Default value is 0, meaning independent bid is allowed. Value of 1 means a group of bids win or fail at the same time. |
 | ext                | object        | No            | Placeholder for bidder-specific extensions to OpenRTB                                                                                                                         |
+
+ 
+
+****
 
  
 
@@ -855,8 +1030,9 @@ Asset response object must strictly follow asset object in the Bid Request. Each
 | data               | object     | No            | Data object for data assets, eg. rating, pricing.Refer to **data object** |
 | link               | object     | No            | Destination link if the ad is clicked.Refer to **link object**            |
 | ext                | object     | No            | Placeholder that may contain custom JSON                                  |
+
+ 
  
-### 
 ### 4.2.5 title object
 
 | **Parameter name** | **Type** | **Required?** | **Description**                          |
