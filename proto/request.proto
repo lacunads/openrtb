@@ -209,6 +209,27 @@ message Imp {
 
   //Placeholder for exchange-specific extensions to OpenRTB.
   optional Ext ext = 18;
+
+  message Ext {
+    optional int32 deeplink       = 1;
+    optional Skadn  skadn         = 2;
+    optional int32  rewarded      = 3;
+    optional int32  fallback      = 4;
+    optional int32  adtype        = 5;
+    optional int32  placement_type= 6;
+    message Skadn {
+       repeated string versions           = 1;
+       optional string version            = 2;
+       optional string sourceapp          = 3;
+       repeated string skadnetids         = 4;
+       optional Skadnetlist skadnetlist   = 5;
+       message Skadnetlist{
+         optional int32 max    =1;
+         repeated int32 excl   =2;
+         repeated string addl  =3;
+       }
+    }
+  }
 }
 
 message Metric {
