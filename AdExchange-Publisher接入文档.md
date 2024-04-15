@@ -838,12 +838,14 @@ Publisher需保证一次广告最多只上报一次展示；
 
 ### 4.1.14 imp.ext object
 
-| **参数名称**          | **类型**      | **是否必传** | **描述**                                                      |
-|:------------------|:------------|:---------|:------------------------------------------------------------|
-| deeplink          | integer     | 否        | 是否支持深度链接标识，值为 0 表示不支持，值为 1 表示支持                             |
-| skadn             | object      | 否        | 苹果广告网络对象，用于传递来自 iOS 14 及更新版本的应用程序数据，具体见 imp.ext.skadn 参数信息  |
-| rewarded          | integer     | 否        | 是否为激励视频广告格式，值为 0 表示否，值为 1 表示是                               |
-| fallback          | integer     | 否        | 是否支持备用广告请求标识，值为 0 表示不支持，值为 1 表示支持                           |
+| **参数名称**       | **类型**    | **是否必传** | **描述**                                                     |
+|:---------------|:----------|:---------|:-----------------------------------------------------------|
+| deeplink       | integer   | 否        | 是否支持深度链接标识，值为 0 表示不支持，值为 1 表示支持                            |
+| skadn          | object    | 否        | 苹果广告网络对象，用于传递来自 iOS 14 及更新版本的应用程序数据，具体见 imp.ext.skadn 参数信息 |
+| rewarded       | integer   | 否        | 是否为激励视频广告格式，值为 0 表示否，值为 1 表示是                              |
+| fallback       | integer   | 否        | 是否支持备用广告请求标识，值为 0 表示不支持，值为 1 表示支持                          |
+| adtype         | integer   | 否        | 请求的广告类型，值为 1 表示banner，值为 2 表示native，值为 3 表示video           |
+| placement_type | integer   | 否        | 请求的广告详细类型，枚举值见 5.27 请求广告的详细类型枚举值列表                         |
 
  
 
@@ -1939,23 +1941,43 @@ Native object字段结构如下：
 | 213     | Creative Filtered - Not Allowed in PMP Deal                                            |
 | >= 1000 | Exchange specific (should be communicated to bidders a priori)                         |
 
+ 
+
 ## 5.26 Data Asset Types枚举值列表
 
-|**Value**|**Description**|
-|:----|:----|
-|sponsored|Sponsored By message where response should contain the brand name of the sponsor.|
-|desc|Descriptive text associated with the product or service being advertised. Longer length of text in response may be truncated or ellipsed by the exchange.|
-|rating|Rating of the product being offered to the user. For example an app’s rating in an app store from 0-5.|
-|likes|Number of social ratings or “likes” of the product being offered to the user.|
-|downloads|Number downloads/installs of this product |
-|price|Price for product / app / in-app purchase. Value should include currency symbol in localised format.|
-|saleprice|Sale price that can be used together with price to indicate a discounted price compared to a regular price. Value should include currency symbol in localised format.|
-|phone|Phone number|
-|address|Address|
-|desc2|Additional descriptive text associated with the product or service being advertised|
-|displayurl|Display URL for the text ad. To be used when sponsoring entity doesn’t own the content. IE sponsored by BRAND on SITE (where SITE is transmitted in this field).|
-|ctatext|CTA description - descriptive text describing a ‘call to action’ button for the destination URL.|
+| *值**       | **描述**                                                                                                                                                                |
+|:-----------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| sponsored  | Sponsored By message where response should contain the brand name of the sponsor.                                                                                     |
+| desc       | Descriptive text associated with the product or service being advertised. Longer length of text in response may be truncated or ellipsed by the exchange.             |
+| rating     | Rating of the product being offered to the user. For example an app’s rating in an app store from 0-5.                                                                |
+| likes      | Number of social ratings or “likes” of the product being offered to the user.                                                                                         |
+| downloads  | Number downloads/installs of this product                                                                                                                             |
+| price      | Price for product / app / in-app purchase. Value should include currency symbol in localised format.                                                                  |
+| saleprice  | Sale price that can be used together with price to indicate a discounted price compared to a regular price. Value should include currency symbol in localised format. |
+| phone      | Phone number                                                                                                                                                          |
+| address    | Address                                                                                                                                                               |
+| desc2      | Additional descriptive text associated with the product or service being advertised                                                                                   |
+| displayurl | Display URL for the text ad. To be used when sponsoring entity doesn’t own the content. IE sponsored by BRAND on SITE (where SITE is transmitted in this field).      |
+| ctatext    | CTA description - descriptive text describing a ‘call to action’ button for the destination URL.                                                                      |
 
+ 
+
+## 5.27 请求广告的详细类型枚举值列表
+
+| **值**   | **描述**                                                                                 |
+|:--------|:---------------------------------------------------------------------------------------|
+| 0       | 未知                                                                                     |
+| 1       | 在app或网页内容区域展示广告，大多数由js渲染                                                               |
+| 2       | 原生图片，一般展示在信息流内容中                                                                       |
+| 3       | 非贴片视频，Outstream video是在网页或app上的非视频内容区域中播放的视频广告                                         |
+| 4       | 激励视频，用户看完视频后能领取到游戏积分或货币奖励                                                              |
+| 5       | 贴片视频，分前贴片、中贴片、后贴片，出现在用户要观看视频内容的前、中、后                                                   |
+| 6       | 插屏视频                                                                                   |
+| 7       | 开屏广告                                                                                   |
+| 8       | 激励banner                                                                               |
+| 9       | 插屏广告，在app或网页弹出弹窗展示广告                                                                   |
+| 10      | 原生视频，一般展示在信息流内容中                                                                       |
+| 11      | oem厂商icon广告位                                                                           |
 
  
 

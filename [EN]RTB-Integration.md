@@ -761,12 +761,14 @@ Display / Impression volume is based on the imp. Publisher needs to ensure no re
 
 ### 4.1.14 imp.ext object
 
-| **参数名称**          | **类型**     | **是否必传**  | **描述**                                                                               |
-|:------------------|:-----------|:----------|:-------------------------------------------------------------------------------------|
-| deeplink          | integer    | No        | Flag to indicate if deeplink is supported, where 0 = not supported, 1 = supported.   |
-| skadn             | object     | No        | Apple iOS 14 SkAdNetwork related data ,information for creating a signature.         |
-| rewarded          | integer    | No        | 1 = The ad is reward video; 0 = not reward video.                                    |
-| fallback          | integer    | No        | Flag to indicate if fallback is supported, where 0 = not supported, 1 = supported.   |
+| **参数名称**         | **类型**      | **是否必传**  | **描述**                                                                             |
+|:-----------------|:------------|:----------|:-----------------------------------------------------------------------------------|
+| deeplink         | integer     | No        | Flag to indicate if deeplink is supported, where 0 = not supported, 1 = supported. |
+| skadn            | object      | No        | Apple iOS 14 SkAdNetwork related data ,information for creating a signature.       |
+| rewarded         | integer     | No        | 1 = The ad is reward video; 0 = not reward video.                                  |
+| fallback         | integer     | No        | Flag to indicate if fallback is supported, where 0 = not supported, 1 = supported. |
+| adtype           | integer     | No        | advertising type of the request，where 1 = banner，2 = native，3 = video              |
+| placement_type   | integer     | No        | detailed advertising type of the request，请求的广告详细类型，Refer to List 5.27              |
 
  
 
