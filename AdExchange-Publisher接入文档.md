@@ -312,10 +312,10 @@ AdEXchange通过 bidresponse.seatbid.bid.exp 字段限定展示延迟有效时�
 |:---------|:-------------|:---------|:----------------------------------------------------------------------------|
 | id       | string       | 是        | Bid Request 唯一标识                                                            |
 | imp      | object array | 是        | 一次请求至少包含一个 impression object；impression object 代表一个广告位的请求；具体见 imp 参数说明；     |
-| site     | object       | 是        | Publisher 的 Site 对象信息，仅推荐应用于Site；具体见 site object 参数说明                       |
-| app      | object       | 是        | Publisher 的 App 对象信息，仅推荐应用于 App；具体见 app object 参数说明                         |
-| device   | object       | 是        | 设备信息，具体见 device object 参数说明                                                 |
-| user     | object       | 是        | 设备用户，广告受众，具体见 user object参数说明                                               |
+| site     | object       | 否        | Publisher 的 Site 对象信息，仅适用于网站流量；与 app 互斥，二者按流量类型二选一；具体见 site object 参数说明                       |
+| app      | object       | 否        | Publisher 的 App 对象信息，仅适用于应用流量；与 site 互斥，二者按流量类型二选一；具体见 app object 参数说明                         |
+| device   | object       | 否（推荐）  | 设备信息，具体见 device object 参数说明                                                 |
+| user     | object       | 否（推荐）  | 设备用户，广告受众，具体见 user object参数说明                                               |
 | test     | integer      | 否        | 测试模式标识符， 值为 1 表示测试模式，竞价不计费；值为 0 表示实况模式 ，default 0                           |
 | at       | integer      | 否        | 拍卖结算类型， 值为 1 表示一价结算，值为 2 表示二价结算 ，default 2                                  |
 | tmax     | integer      | 否        | 允许接收出价的最大时间（毫秒），包括互联网延迟，以避免超时。                                              |
@@ -323,7 +323,7 @@ AdEXchange通过 bidresponse.seatbid.bid.exp 字段限定展示延迟有效时�
 | bseat    | string array | 否        | 买方席位（广告主、代理商）黑名单                                                            |
 | allimps  | integer      | 否        | exchange 是否可以验证提供的展示是否代表上下文中可用的所有展示，值为 0 表示否或未知，值为 1 表示是，default 0          |
 | cur      | string array | 否        | 使用 ISO-4217 alpha 代码的货币类型，仅用于AdExchange接受多种货币时推荐                            |
-| walng    | string array | 否        | 语言白名单                                                                       |
+| wlang    | string array | 否        | 语言白名单                                                                       |
 | bcat     | string array | 否        | IAB category 类型白名单 ,枚举值参见 5.1 IAB category 枚举值列表                            |
 | badv     | string array | 否        | 域名黑名单                                                                       |
 | bapp     | string array | 否        | App 黑名单                                                                     |
@@ -337,9 +337,9 @@ AdEXchange通过 bidresponse.seatbid.bid.exp 字段限定展示延迟有效时�
 
 | **参数名称**    | **类型**  | **是否必传**   | **描述**                                       |
 |:------------|:--------|:-----------|:---------------------------------------------|
-| fd          | integer | 是          | 负责最终展示交易决策的实体，值为 0 表示 adexchange，值为 1 表示上游来源 |
-| tid         | string  | 是          | 此出价请求中所有参与者必须共用的交易 ID                        |
-| pchain      | string  | 是          | 支付 ID 链字符串，包含 TAG 支付 ID 协议 v1.0 中描述的嵌入语法。    |
+| fd          | integer | 否（推荐）  | 负责最终展示交易决策的实体，值为 0 表示 adexchange，值为 1 表示上游来源 |
+| tid         | string  | 否（推荐）  | 此出价请求中所有参与者必须共用的交易 ID                        |
+| pchain      | string  | 否（推荐）  | 支付 ID 链字符串，包含 TAG 支付 ID 协议 v1.0 中描述的嵌入语法。    |
 | ext         | object  | 否          | 扩展字段                                         |
 
  
@@ -348,7 +348,7 @@ AdEXchange通过 bidresponse.seatbid.bid.exp 字段限定展示延迟有效时�
 
 | **参数名称**    | **类型**  | **是否必传** | **描述**                                                      |
 |:------------|:--------|:---------|:------------------------------------------------------------|
-| coppa       | integer | 是        | 请求是否符合美国联邦贸易委员会制定的《保护消费者权益法》（COPPA）规定的标志，值为 0 表示否，值为 1 表示是  |
+| coppa       | integer | 否        | 请求是否符合美国联邦贸易委员会制定的《儿童在线隐私保护法》（COPPA）规定的标志，值为 0 表示否，值为 1 表示是  |
 | ext         | object  | 否        | 扩展字段                                                        |
 
  
@@ -367,7 +367,7 @@ AdEXchange通过 bidresponse.seatbid.bid.exp 字段限定展示延迟有效时�
 | displaymanager            | string       | 否           | 负责呈现广告（通常是视频或移动）的广告中介合作伙伴、SDK 技术或播放器的名称。 一些广告服务器使用它来自定义合作伙伴的广告代码。 推荐用于视频和/或应用程序                   |
 | displaymanagerver         | string       | 否           | displaymanage版本号                                                                                  |
 | instl                     | integer      | 否           | 插屏或全屏，default 0 ; 值为 1 表示插屏或全屏，值为 0 表示非插屏                                                         |
-| tagid                     | integer      | 否           | 特定广告位置或广告代码                                                                                       |
+| tagid                     | string       | 否           | 特定广告位置或广告代码                                                                                       |
 | bidfloor                  | float        | 否           | 本次展示的最低 cpm 竞拍价格，default 0                                                                        |
 | bidfloorcur               | string       | 否           | 竞价货币单位 ,default "USD"                                                                             |
 | clickbrowser              | integer      | 否           | 单击应用程序中的创意时打开的浏览器类型，值为 0 表示嵌入式，值为 1 表示原生                                                          |
@@ -605,7 +605,7 @@ AdEXchange通过 bidresponse.seatbid.bid.exp 字段限定展示延迟有效时�
 
 | **参数名称**       | **类型**         | **是否必传** | **描述**                                              |
 |:---------------|:---------------|:---------|:----------------------------------------------------|
-| id             | string         | 是        | exchange 定义的 Site ID                                |
+| id             | string         | 否（推荐）  | exchange 定义的 Site ID                                |
 | name           | string         | 否        | Site 名称                                             |
 | domain         | string         | 否        | Site 的域名，例如 mygame.foo.com                          |
 | cat            | string array   | 否        | Site 的 IAB category；枚举值参见 5.1 IAB category 枚举值列表    |
@@ -627,9 +627,9 @@ AdEXchange通过 bidresponse.seatbid.bid.exp 字段限定展示延迟有效时�
 
 | **参数名称**      | **类型**       | **是否必传** | **描述**                                             |
 |:--------------|:-------------|:---------|:---------------------------------------------------|
-| id            | string       | 是        | exchange 定义的 App ID                                |
+| id            | string       | 否（推荐）  | exchange 定义的 App ID                                |
 | name          | string       | 否        | App 名称                                             |
-| bundle        | string       | 是        | App 的包名信息                                          |
+| bundle        | string       | 否（本平台 App 流量必填） | App 的包名信息                                          |
 | domain        | string       | 否        | App 的域名，例如 mygame.foo.com                          |
 | storeurl      | string       | 否        | 已安装 App 的应用商店 URL；符合IQG 2.1                        |
 | cat           | string array | 否        | App 的 IAB category；枚举值参见 5.1 IAB category 枚举值列表    |
@@ -771,14 +771,13 @@ AdEXchange通过 bidresponse.seatbid.bid.exp 字段限定展示延迟有效时�
 
 | **参数名称**    | **类型**       | **是否必传** | **描述**                        |
 |:------------|:-------------|:---------|:------------------------------|
-| id          | string       | 是        | 用户id                          |
+| id          | string       | 否        | 用户id                          |
 | buyeruid    | string       | 否        | 买方定义的用户id                     |
 | gender      | string       | 否        | 性别，“M” = 男, “F” = 女, “O” = 其他 |
 | geo         | object       | 否        | 用户地理位置信息                      |
 | yob         | integer      | 否        | 出生年份，4位整数                     |
 | keywords    | string       | 否        | 逗号分隔的关键字列表，兴趣，或意图             |
 | customdata  | string       | 否        | 自定义数据                         |
-| geo         | object       | 否        | 用户当前的地理位置信息，详见 geo object     |
 | data        | object array | 否        | 额外用户数据。每个数据对象表示不同的数据源         |
 | ext         | object       | 否        | 扩展字段                          |
 
@@ -843,22 +842,22 @@ AdEXchange通过 bidresponse.seatbid.bid.exp 字段限定展示延迟有效时�
 |:------------------|:--------------|:-----------|:---------------------------------------------------------------------------------------------------|
 | id                | string        | 是          | 竞拍者生成的竞价 ID，用于记录日志或行为追踪                                                                            |
 | impid             | string        | 是          | 关联的竞价请求中的 Imp 对象的 ID                                                                               |
-| price             | float         | 是          | 对该次展示的出价，以 CPM 表示                                                                                  |
+| price             | double        | 是          | 对该次展示的出价，以 CPM 表示                                                                                  |
 | nurl              | string        | 否          | 胜出通知地址，如果竞价胜出的时候由交易平台调用                                                                            |
 | burl              | string        | 否          | 当竞价变成实际的订单时的url地址（例如被曝光）。里面的${AUCTION_PRICE}宏需要被替换                                                 |
 | lurl              | string        | 否          | 竞价失败通知地址，由交易平台调用                                                                                   |
-| adm               | string        | 是          | 传输广告的内容字段。 native广告形式通过adm字段返回广告内容。详情参考native广告形式的返回说明。 视频通过adm字段返回vast形式的广告内容。详情参考vast video返回说明； |
+| adm               | string        | 否          | 传输广告的内容字段。native 广告通过 adm 返回广告内容，视频广告通过 adm 返回 VAST 内容；也可使用 nurl 获取广告内容 |
 | adid              | string        | 否          | 预加载的广告 ID。可以在竞价胜出的时候使用                                                                             |
 | adomain           | string array  | 否          | 用于限制检测的广告主域名， 对于旋转的物料可以是一个数组， 交易平台可以限制只允许一个域名                                                      |
-| bundle            | string        | 是（下载类广告必传） | 应用的包名信息；安卓包名示例 com.foo.mygame；ios 包名示例 id907394059                                                 |
+| bundle            | string        | 否（下载类广告推荐） | 应用的包名信息；安卓包名示例 com.foo.mygame；ios 包名示例 id907394059                                                 |
 | iurl              | string        | 否          | 用于质量或者安全监测的表示广告活动内容的图像地址                                                                           |
 | cid               | string        | 否          | 广告 ID，辅助广告审核；iurl 代表的一组素材                                                                          |
 | crid              | string        | 否          | 一组素材的 ID；辅助广告审核                                                                                    |
 | tactic            | string        | 否          | 策略 ID，使买家能够标记出价，以便向交易所报告提交其出价的策略                                                                   |
 | cat               | string array  | 否          | creative 的IAB内容类型；枚举值参考 IAB category 枚举值列表。表5.1                                                    |
 | attr              | integer array | 否          | 描述 creative 的属性集合；枚举值参见 5.3 creative 属性枚举值列表                                                       |
-| api               | integer       | 否          | 该次展示可支持的 API 框架；枚举值参考 5.6 API框架枚举值列表                                                               |
-| protocol          | integer       | 否          | 支持的视频竞价响应协议；枚举值参考 5.8 视频竞价响应协议枚举值列表 ；                                                              |
+| api               | integer       | 否          | 该次广告内容所需的 API 框架；枚举值参考 5.6 API框架枚举值列表                                                               |
+| protocol          | integer       | 否          | 广告内容支持的视频竞价响应协议；枚举值参考 5.8 视频竞价响应协议枚举值列表 ；                                                              |
 | qagmediarating    | integer       | 否          | 表示根据 IAB IGQ 标准的素材内容等级； ，枚举值参考 5.19 IQG媒体分级枚举值列表                                                   |
 | language          | string        | 否          | 使用 ISO-639-1-alpha-2 的素材语言                                                                         |
 | dealid            | string        | 否          | 如果出价从属于某个私有市场直接交易规则， 则指向竞价请求中该交易规则的 deal.id                                                        |
