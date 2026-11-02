@@ -245,7 +245,7 @@ Midas defines the valid duration (in seconds) between the bid / auction and the 
 | bseat              | string array | No            | Block list of buyer seats (e.g., advertisers, agencies) restricted from bidding on this impression.                                                                                                                                                                                                             |
 | allimps            | integer      | No            | Flag to indicate if Exchange can verify that the impressions offered represent all of the impressions available in context(e.g., all on the web page, all video spots such as pre/mid/post roll) to support road-blocking. 0 = no or unknown, 1 = yes, the impressions offered represent all that are available |
 | cur                | string array | No            | Array of allowed currencies for bids on this bid request using ISO-4217 alpha codes. Recommended only if the exchange accepts multiple currencies.                                                                                                                                                              |
-| walng              | string array | No            | White list of languages for creatives using ISO-639-1-alpha-2.                                                                                                                                                                                                                                                  |
+| wlang              | string array | No            | White list of languages for creatives using ISO-639-1-alpha-2.                                                                                                                                                                                                                                                  |
 | bcat               | string array | No            | Blocked advertiser categories using the IAB content categories. Refer to List 5.1.                                                                                                                                                                                                                              |
 | badv               | string array | No            | Domain name in blacklist                                                                                                                                                                                                                                                                                        |
 | bapp               | string array | No            | App name in blacklist.On Android, these should be bundle or package names (e.g., com.foo.mygame). On iOS, these are numeric IDs.                                                                                                                                                                                |
@@ -257,12 +257,12 @@ Midas defines the valid duration (in seconds) between the bid / auction and the 
 
 ### 4.1.1 source object
 
-| **Parameter name** | **Type**   | **Required?**         | **Description**                                                                                                       |
-|:-------------------|:-----------|:----------------------|:----------------------------------------------------------------------------------------------------------------------|
-| fd                 | integer    | Yes                   | Entity responsible for the final impression sale decision, where0 = exchange, 1 = upstream source                     |
-| tid                | string     | Yes                   | Transaction ID that must be common across all participants in this bid request (e.g., potentially multiple exchanges) |
-| pchain             | string     | Yes                   | Payment ID chain string containing embedded syntax described in the TAG Payment ID Protocol v1.0                      |
-| ext                | object     | No                    | Placeholder for exchange-specific extensions to OpenRTB                                                               |
+| **Parameter name** | **Type**   | **Required?**      | **Description**                                                                                                       |
+|:-------------------|:-----------|:-------------------|:----------------------------------------------------------------------------------------------------------------------|
+| fd                 | integer    | No (recommended)   | Entity responsible for the final impression sale decision, where0 = exchange, 1 = upstream source                     |
+| tid                | string     | No (recommended)   | Transaction ID that must be common across all participants in this bid request (e.g., potentially multiple exchanges) |
+| pchain             | string     | No (recommended)   | Payment ID chain string containing embedded syntax described in the TAG Payment ID Protocol v1.0                      |
+| ext                | object     | No                 | Placeholder for exchange-specific extensions to OpenRTB                                                               |
 
  
 
@@ -323,7 +323,7 @@ Midas defines the valid duration (in seconds) between the bid / auction and the 
 | btype              | integer array  | No            | Blocked banner ad types. Refer to List 5.2.                                                                                                                                                                                                    |
 | battr              | integer array  | No            | Blocked creative attributes. Refer to List 5.3.                                                                                                                                                                                                |
 | pos                | integer        | No            | Ad position on screen. Refer to List 5.4.                                                                                                                                                                                                      |
-| mimes              | string array   | No            | Content MIME types supported. Popular MIME types may include "application/x-shockwave-flash", “image/jpg”, and “image/gif”                                                            |
+| mimes              | string array   | No            | Content MIME types supported. Popular MIME types may include "application/x-shockwave-flash", “image/jpg”, and “image/gif”                                                                                                                     |
 | topframe           | integer        | No            | Indicates if the banner is in the top frame as opposed to an iframe, where 0 = no, 1 = yes                                                                                                                                                     |
 | expdir             | integer array  | No            | Directions in which the banner may expand. Refer to List 5.5                                                                                                                                                                                   |
 | api                | integer array  | No            | List of supported API frameworks for this impression. Refer to List 5.6. If an API is not explicitly listed, it is assumed not to be supported                                                                                                 |
@@ -519,44 +519,44 @@ Midas defines the valid duration (in seconds) between the bid / auction and the 
 
 ### 4.1.18 site object
 
-| **Parameter name** | **Type**        | **Required?** | **Description**                                                                                                   |
-|:-------------------|:----------------|:--------------|:------------------------------------------------------------------------------------------------------------------|
-| id                 | string          | Yes           | Exchange definition of Site ID                                                                                    |
-| name               | string          | No            | Site name                                                                                                         |
-| domain             | string          | No            | Domain of the site (e.g., “mysite.foo.com”)                                                                       |
-| cat                | string array    | No            | Array of IAB content categories of the site. Refer to List 5.1                                                    |
-| sectioncat         | string array    | No            | Array of IAB content categories that describe the currentsection of the site. Refer to List 5.1                   |
-| pagecat            | string array    | No            | Array of IAB content categories that describe the current page or view of the site. Refer to List 5.1             |
-| page               | string          | No            | URL of the page where the impression will be shown                                                                |
-| ref                | string          | No            | Referrer URL that caused navigation to the current page                                                           |
-| search             | string          | No            | Search string that caused navigation to the current page                                                          |
-| mobile             | integer         | No            | Indicates if the site has been programmed to optimize layout when viewed on mobile devices, where 0 = no, 1 = yes |
-| privacypolicy      | integer         | No            | Indicates if the site has a privacy policy, where 0 = no, 1 = yes                                                 |
-| publisher          | object          | No            | Details about the Publisher of the site. Refer to **publisher object**                                            |
-| content            | object          | No            | Details about the Content within the site. Refer to **content object**                                            |
-| keywords           | string          | No            | Comma separated list of keywords about the site                                                                   |
-| ext                | object          | No            | Placeholder for exchange-specific extensions to OpenRTB                                                           |
+| **Parameter name** | **Type**        | **Required?**            | **Description**                                                                                                   |
+|:-------------------|:----------------|:-------------------------|:------------------------------------------------------------------------------------------------------------------|
+| id                 | string          | No (recommended)         | Exchange definition of Site ID                                                                                    |
+| name               | string          | No                       | Site name                                                                                                         |
+| domain             | string          | No                       | Domain of the site (e.g., “mysite.foo.com”)                                                                       |
+| cat                | string array    | No                       | Array of IAB content categories of the site. Refer to List 5.1                                                    |
+| sectioncat         | string array    | No                       | Array of IAB content categories that describe the currentsection of the site. Refer to List 5.1                   |
+| pagecat            | string array    | No                       | Array of IAB content categories that describe the current page or view of the site. Refer to List 5.1             |
+| page               | string          | No                       | URL of the page where the impression will be shown                                                                |
+| ref                | string          | No                       | Referrer URL that caused navigation to the current page                                                           |
+| search             | string          | No                       | Search string that caused navigation to the current page                                                          |
+| mobile             | integer         | No                       | Indicates if the site has been programmed to optimize layout when viewed on mobile devices, where 0 = no, 1 = yes |
+| privacypolicy      | integer         | No                       | Indicates if the site has a privacy policy, where 0 = no, 1 = yes                                                 |
+| publisher          | object          | No                       | Details about the Publisher of the site. Refer to **publisher object**                                            |
+| content            | object          | No                       | Details about the Content within the site. Refer to **content object**                                            |
+| keywords           | string          | No                       | Comma separated list of keywords about the site                                                                   |
+| ext                | object          | No                       | Placeholder for exchange-specific extensions to OpenRTB                                                           |
 
  
 
 ### 4.1.19 app object 
 
-| **Parameter name** | **Type**       | **Required?** | **Description**                                                                                       |
-|:-------------------|:---------------|:--------------|:------------------------------------------------------------------------------------------------------|
-| id                 | string         | Yes           | Exchange  definition of App ID                                                                        |
-| name               | string         | No            | App name                                                                                              |
-| bundle             | string         | Yes           | App package name info                                                                                 |
-| domain             | string         | No            | App domain name, eg. mygame.foo.com                                                                   |
-| storeurl           | string         | No            | App store URL for an installed app; for IQG 2.1 compliance                                            |
-| cat                | string array   | No            | App IAB category.Section **5.1 IAB category** is the reference of its enumerated values               |
-| sectioncat         | string array   | No            | Array of IAB content categories that describe the currentsection of the site. Refer to List 5.1       |
-| pagecat            | string array   | No            | Array of IAB content categories that describe the current page or view of the site. Refer to List 5.1 |
-| ver                | string         | No            | App version                                                                                           |
-| privacypolicy      | integer        | No            | Indicates if the app has a privacy policy, where 0 = no, 1 = yes                                      |
-| publisher          | object         | No            | Details about the Publisher of the app. Refer to **publisher object**                                 |
-| content            | object         | No            | Details about the Content within the app. Refer to **content object**                                 |
-| keywords           | string         | No            | Comma separated list of keywords about the app                                                        |
-| ext                | object         | No            | Placeholder for exchange-specific extensions to OpenRTB                                               |
+| **Parameter name** | **Type**       | **Required?**     | **Description**                                                                                       |
+|:-------------------|:---------------|:------------------|:------------------------------------------------------------------------------------------------------|
+| id                 | string         | No (recommended)  | Exchange  definition of App ID                                                                        |
+| name               | string         | No                | App name                                                                                              |
+| bundle             | string         | Yes               | App package name info                                                                                 |
+| domain             | string         | No                | App domain name, eg. mygame.foo.com                                                                   |
+| storeurl           | string         | No                | App store URL for an installed app; for IQG 2.1 compliance                                            |
+| cat                | string array   | No                | App IAB category.Section **5.1 IAB category** is the reference of its enumerated values               |
+| sectioncat         | string array   | No                | Array of IAB content categories that describe the currentsection of the site. Refer to List 5.1       |
+| pagecat            | string array   | No                | Array of IAB content categories that describe the current page or view of the site. Refer to List 5.1 |
+| ver                | string         | No                | App version                                                                                           |
+| privacypolicy      | integer        | No                | Indicates if the app has a privacy policy, where 0 = no, 1 = yes                                      |
+| publisher          | object         | No                | Details about the Publisher of the app. Refer to **publisher object**                                 |
+| content            | object         | No                | Details about the Content within the app. Refer to **content object**                                 |
+| keywords           | string         | No                | Comma separated list of keywords about the app                                                        |
+| ext                | object         | No                | Placeholder for exchange-specific extensions to OpenRTB                                               |
 
  
 
@@ -684,17 +684,17 @@ Midas defines the valid duration (in seconds) between the bid / auction and the 
 
 ### 4.1.14 user object 
 
-| **Parameter name** | **Type**     | **Required?** | **Description**                                                             |
-|:-------------------|:-------------|:--------------|:----------------------------------------------------------------------------|
-| id                 | string       | Yes           | User ID                                                                     |
-| buyeruid           | string       | No            | User ID defined by buyer                                                    |
-| gender             | string       | No            | Gender. Value of M means male, F means female, 0 means other gender.        |
-| geo                | object       | No            | User geo info                                                               |
-| yob                | integer      | No            | Year of birth, 4-digit number.                                              |
-| keywords           | string       | No            | Keywords list of user's interests / intentions list, separated by comma (,) |
-| customdata         | string       | No            | Customized data                                                             |
-| data               | object array | No            | Extra user data. Each data object represents a different data source        |
-| ext                | object       | No            | Placeholder for exchange-specific extensions to OpenRTB                     |
+| **Parameter name** | **Type**     | **Required?**     | **Description**                                                             |
+|:-------------------|:-------------|:------------------|:----------------------------------------------------------------------------|
+| id                 | string       | No (recommended)  | User ID                                                                     |
+| buyeruid           | string       | No                | User ID defined by buyer                                                    |
+| gender             | string       | No                | Gender. Value of M means male, F means female, 0 means other gender.        |
+| geo                | object       | No                | User geo info                                                               |
+| yob                | integer      | No                | Year of birth, 4-digit number.                                              |
+| keywords           | string       | No                | Keywords list of user's interests / intentions list, separated by comma (,) |
+| customdata         | string       | No                | Customized data                                                             |
+| data               | object array | No                | Extra user data. Each data object represents a different data source        |
+| ext                | object       | No                | Placeholder for exchange-specific extensions to OpenRTB                     |
 
  
 
@@ -751,34 +751,34 @@ Midas defines the valid duration (in seconds) between the bid / auction and the 
 
 Each bid object must have a corresponding imp id, indicating the bid is offered for the specific impression.
 
-| **Parameter name**   | **Type**      | **Required?**       | **Description**                                                                                                                                                                                                                             |
-|:---------------------|:--------------|:--------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| id                   | string        | Yes                 | Bid ID generated for each bidder, used for recording logs or tracking acitivity                                                                                                                                                             |
-| impid                | string        | Yes                 | ID of imp object related to a Bid request                                                                                                                                                                                                   |
-| price                | float         | Yes                 | CPM price for each display                                                                                                                                                                                                                  |
-| nurl                 | string        | No                  | Nurl link for notification when a bid wins, and will then be used by transaction platform                                                                                                                                                   |
-| burl                 | string        | No                  | Billing notice URL called by the exchange when a winning bid becomes billable based on exchange-specific business policy (e.g.,typically delivered, viewed, etc.).Substitution macros ${AUCTION_PRICE} may be included                      |
-| lurl                 | string        | No                  | Loss notice URL called by the exchange when a bid is known to have been loss                                                                                                                                                                |
-| adm                  | string        | Yes                 | Convey ad content.Native ad uses adm field to return ad content. Refer to **native ad response** below for more detailsVideo ad uses adm field to return ad content in vast format. Refer to **vast video response** below for more details |
-| adid                 | string        | No                  | Preloaded ad ID that can be used when a bid offer wins                                                                                                                                                                                      |
-| adomain              | string array  | No                  | Domain name of client, used for filtering check                                                                                                                                                                                             |
-| bundle               | string        | Yes for install ads | App package name, eg. Android package name: com.foo.mygame, iOS package name: id907394059                                                                                                                                                   |
-| iurl                 | string        | No                  | Image link to indicate ad campaign content, used for quality or security tracking                                                                                                                                                           |
-| cid                  | string        | No                  | Campaign ID, to assist with ad QC. Each cid has one set of creatives, which is the creatives represented by iurl                                                                                                                            |
-| crid                 | string        | No                  | ID of a set of creatives, to assist with ad QC                                                                                                                                                                                              |
-| cat                  | string array  | No                  | IAB category of creative.Section **5.1 IAB category** is the reference of its enumerated values                                                                                                                                             |
-| attr                 | integer array | No                  | Attribute array to describe creative.Section **5.3 Creative attribute list** is the reference of its enumerated values                                                                                                                      |
-| api                  | integer       | No                  | Supported API frame of the display. Section **5.6 API frame** is the reference of its enumerated values                                                                                                                                     |
-| protocol             | integer       | No                  | Supported video Bid Response protocol. Section **5.8 Video bid response protocol** is the reference of its enumerated values                                                                                                                |
-| qagmediarating       | integer       | No                  | Indicate rating of creative content following IQG standard.Section **5.9 IQG media rating** is the reference of its enumerated values                                                                                                       |
-| language             | string        | No                  | Language of the creative using ISO-639-1-alpha-2                                                                                                                                                                                            |
-| dealid               | string        | No                  | Refer to deal.id****from the bid request if this bid pertains to a private marketplace direct deal                                                                                                                                          |
-| w                    | integer       | No                  | Creative width. Unit is in pixels                                                                                                                                                                                                           |
-| h                    | integer       | No                  | Creative height. Unit is in pixels                                                                                                                                                                                                          |
-| wratio               | integer       | No                  | Relative width of the creative when expressing size as a ratio. Required for Flex Ads                                                                                                                                                       |
-| hratio               | integer       | No                  | Relative height of the creative when expressing size as a ratio. Required for Flex Ads                                                                                                                                                      |
-| exp                  | integer       | No                  | Duration that the bidder is willing to wait between the auction and the actual display / impression.Unit is in seconds, with default value of 3600                                                                                          |
-| ext                  | object        | No                  | Placeholder for bidder-specific extensions to OpenRTB                                                                                                                                                                                       |
+| **Parameter name**   | **Type**      | **Required?**                     | **Description**                                                                                                                                                                                                                             |
+|:---------------------|:--------------|:----------------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| id                   | string        | Yes                               | Bid ID generated for each bidder, used for recording logs or tracking acitivity                                                                                                                                                             |
+| impid                | string        | Yes                               | ID of imp object related to a Bid request                                                                                                                                                                                                   |
+| price                | float         | Yes                               | CPM price for each display                                                                                                                                                                                                                  |
+| nurl                 | string        | No                                | Nurl link for notification when a bid wins, and will then be used by transaction platform                                                                                                                                                   |
+| burl                 | string        | No                                | Billing notice URL called by the exchange when a winning bid becomes billable based on exchange-specific business policy (e.g.,typically delivered, viewed, etc.).Substitution macros ${AUCTION_PRICE} may be included                      |
+| lurl                 | string        | No                                | Loss notice URL called by the exchange when a bid is known to have been loss                                                                                                                                                                |
+| adm                  | string        | Yes                               | Convey ad content.Native ad uses adm field to return ad content. Refer to **native ad response** below for more detailsVideo ad uses adm field to return ad content in vast format. Refer to **vast video response** below for more details |
+| adid                 | string        | No                                | Preloaded ad ID that can be used when a bid offer wins                                                                                                                                                                                      |
+| adomain              | string array  | No                                | Domain name of client, used for filtering check                                                                                                                                                                                             |
+| bundle               | string        | No (recommended for install ads)  | App package name, eg. Android package name: com.foo.mygame, iOS package name: id907394059                                                                                                                                                   |
+| iurl                 | string        | No                                | Image link to indicate ad campaign content, used for quality or security tracking                                                                                                                                                           |
+| cid                  | string        | No                                | Campaign ID, to assist with ad QC. Each cid has one set of creatives, which is the creatives represented by iurl                                                                                                                            |
+| crid                 | string        | No                                | ID of a set of creatives, to assist with ad QC                                                                                                                                                                                              |
+| cat                  | string array  | No                                | IAB category of creative.Section **5.1 IAB category** is the reference of its enumerated values                                                                                                                                             |
+| attr                 | integer array | No                                | Attribute array to describe creative.Section **5.3 Creative attribute list** is the reference of its enumerated values                                                                                                                      |
+| api                  | integer       | No                                | API framework required by the markup. Section **5.6 API frame** is the reference of its enumerated values                                                                                                                                   |
+| protocol             | integer       | No                                | Video bid response protocol supported by the markup Section **5.8 Video bid response protocol** is the reference of its enumerated values                                                                                                   |
+| qagmediarating       | integer       | No                                | Indicate rating of creative content following IQG standard.Section **5.9 IQG media rating** is the reference of its enumerated values                                                                                                       |
+| language             | string        | No                                | Language of the creative using ISO-639-1-alpha-2                                                                                                                                                                                            |
+| dealid               | string        | No                                | Refer to deal.id****from the bid request if this bid pertains to a private marketplace direct deal                                                                                                                                          |
+| w                    | integer       | No                                | Creative width. Unit is in pixels                                                                                                                                                                                                           |
+| h                    | integer       | No                                | Creative height. Unit is in pixels                                                                                                                                                                                                          |
+| wratio               | integer       | No                                | Relative width of the creative when expressing size as a ratio. Required for Flex Ads                                                                                                                                                       |
+| hratio               | integer       | No                                | Relative height of the creative when expressing size as a ratio. Required for Flex Ads                                                                                                                                                      |
+| exp                  | integer       | No                                | Duration that the bidder is willing to wait between the auction and the actual display / impression.Unit is in seconds, with default value of 3600                                                                                          |
+| ext                  | object        | No                                | Placeholder for bidder-specific extensions to OpenRTB                                                                                                                                                                                       |
 
  
 
