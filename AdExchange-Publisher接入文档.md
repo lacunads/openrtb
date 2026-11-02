@@ -352,7 +352,7 @@ Publisher需保证一次广告最多只上报一次展示；
 | bseat    | string array | 否                     | 买方席位（广告主、代理商）黑名单                                                            |
 | allimps  | integer      | 否                     | exchange 是否可以验证提供的展示是否代表上下文中可用的所有展示，值为 0 表示否或未知，值为 1 表示是，default 0          |
 | cur      | string array | 否                     | 使用 ISO-4217 alpha 代码的货币类型，仅用于AdExchange接受多种货币时推荐                            |
-| walng    | string array | 否                     | 语言白名单                                                                       |
+| wlang    | string array | 否                     | 语言白名单                                                                       |
 | bcat     | string array | 否                     | IAB category 类型白名单 ,枚举值参见 5.1 IAB category 枚举值列表                            |
 | badv     | string array | 否                     | 域名黑名单                                                                       |
 | bapp     | string array | 否                     | App 黑名单                                                                     |
@@ -452,7 +452,7 @@ Publisher需保证一次广告最多只上报一次展示；
 | displaymanager            | string       | 是                       | 负责呈现广告（通常是视频或移动）的广告中介合作伙伴、SDK 技术或播放器的名称。 一些广告服务器使用它来自定义合作伙伴的广告代码。 推荐用于视频和/或应用程序                   |
 | displaymanagerver         | string       | 是                       | displaymanage版本号                                                                                  |
 | instl                     | integer      | 否                       | 插屏或全屏，default 0 ; 值为 1 表示插屏或全屏，值为 0 表示非插屏                                                         |
-| tagid                     | integer      | 是                       | 特定广告位置或广告代码                                                                                       |
+| tagid                     | string       | 是                       | 特定广告位置或广告代码                                                                                       |
 | bidfloor                  | float        | 是                       | 本次展示的最低 cpm 竞拍价格，default 0                                                                        |
 | bidfloorcur               | string       | 是                       | 竞价货币单位 ,default "USD"                                                                             |
 | clickbrowser              | integer      | 否                       | 单击应用程序中的创意时打开的浏览器类型，值为 0 表示嵌入式，值为 1 表示原生                                                          |
